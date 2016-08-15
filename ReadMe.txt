@@ -7,9 +7,8 @@ Step1, Install Raspbian official mirror
 2)Use“SDFormatter.exe”to Format your TF Card，
 3)Use“Win32DiskImager.exe” Burning mirror to TF Card。
 Step2, Install LCD Driver                                                                                
-1)
-download LCD-show-160701.tar.gz from Github
-https://github.com/goodtft/LCD-show.git
+1)Clone my repo onto your pi
+git clone https://github.com/goodtft/LCD-show.git
 Copy “LCD-show-160701.tar.gz” to the root directory of raspberry pi（you can copy it directly to TF card after Step1, or use SFTP to remote copy）
 2)Landing Raspberry pi system to user command line (Name:pi,Password:raspberry)，Execute the following command:
 cd /boot
