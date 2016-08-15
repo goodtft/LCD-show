@@ -1,0 +1,6 @@
+sudo cp -rf ./usr/modules-HDMI  /etc/modules
+sudo cp -rf ./usr/99-fbturbo.conf-HDMI  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+sudo cp ./boot/config-nomal.txt /boot/config.txt
+sudo cp ./usr/cmdline.txt /boot/
+sudo cp ./usr/inittab /etc/
+sudo reboot
