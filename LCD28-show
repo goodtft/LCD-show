@@ -1,4 +1,4 @@
-sudo mkdir /etc/X11/xorg.conf.d
+sudo mkdir -p /etc/X11/xorg.conf.d
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/tft9341.dtbo
 sudo cp -rf ./usr/99-calibration.conf-28  /etc/X11/xorg.conf.d/99-calibration.conf
