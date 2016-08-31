@@ -1,15 +1,15 @@
 #LCD driver for the Raspberry PI Installation
 ##Update: 
-v1.1-20160815
+  v1.1-20160815
   
 ##1.)Step1, Install Raspbian official mirror  
-####a)Download Raspbian official mirror:https://www.raspberrypi.org/downloads/
-####b)Use“SDFormatter.exe”to Format your TF Card
-####c)Use“Win32DiskImager.exe” Burning mirror to TF Card
+  ####a)Download Raspbian official mirror:https://www.raspberrypi.org/downloads/<br>
+  ####b)Use“SDFormatter.exe”to Format your TF Card<br>
+  ####c)Use“Win32DiskImager.exe” Burning mirror to TF Card<br>
      
 ##2.) Clone my repo onto your pi
-```git clone https://github.com/goodtft/LCD-show.git```<br>
-```chmod -R 755 LCD-show```<br>
+```git clone https://github.com/goodtft/LCD-show.git```<br><br>
+```chmod -R 755 LCD-show```<br><br>
 ```cd LCD-show/```<br>
   
 ##3.)According to your LCD's type, excute:
