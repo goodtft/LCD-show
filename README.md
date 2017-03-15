@@ -1,9 +1,11 @@
 #LCD driver for the Raspberry PI Installation
+
 ##Update: 
   v1.2-20170302
-  ###add the command bellow to solve problem with Raspbian-2017-03-02
-```sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb```
-```sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf```
+  ##dd the command bellow to solve problem with Raspbian-2017-03-02<br><br>
+```sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb```<br><br>
+```sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf```<br><br>
+
 ##Update: 
   v1.1-20160815
   
