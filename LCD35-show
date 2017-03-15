@@ -1,5 +1,5 @@
 sudo mkdir -p /etc/X11/xorg.conf.d
-sudo apt-get install xserver-xorg-input-evdev
+sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb
 sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
 sudo cp ./usr/tft35a-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft35a-overlay.dtb /boot/overlays/tft35a.dtbo
