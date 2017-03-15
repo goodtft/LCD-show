@@ -1,6 +1,4 @@
 sudo mkdir -p /etc/X11/xorg.conf.d
-sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb
-sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/tft9341.dtbo
 sudo cp -rf ./usr/99-calibration.conf-32  /etc/X11/xorg.conf.d/99-calibration.conf
