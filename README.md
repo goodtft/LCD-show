@@ -5,8 +5,8 @@ Update: <br><br>
 -----------------------------------------------------
   v1.2-20170302<br><br>
   Add the command bellow to solve problem with Raspbian-2017-03-02<br><br>
-```sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb<br><br>```
-```sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf<br><br>```
+```sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb```<br><br>
+```sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf```<br><br>
 
 Update: <br><br>
 -----------------------------------------------------
