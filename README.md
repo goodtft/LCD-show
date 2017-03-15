@@ -5,7 +5,7 @@ Update: <br><br>
 -----------------------------------------------------
   v1.2-20170302<br><br>
   NOTE:if you are using the newest Raspbian version:2017-03-02<br>
-  you need to additional excute this two command bellow after Step1,2,3 excuted:<br>
+  you need to additional excute this two command bellow after Step1,2,3 excuted:<br><br>
 ```sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb```<br>
 ```sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf```<br><br>
 
@@ -15,7 +15,7 @@ Update: <br><br>
   
 1.)Step1, Install Raspbian official mirror <br><br> 
 ====================================================
-  a)Download Raspbian official mirror:<br><br>
+  a)Download Raspbian official mirror:<br>
   https://www.raspberrypi.org/downloads/<br>
   b)Use“SDFormatter.exe”to Format your TF Card<br>
   c)Use“Win32DiskImager.exe” Burning mirror to TF Card<br>
