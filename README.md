@@ -15,12 +15,9 @@ Update: <br><br>
 1.)Step1, Install Raspbian official mirror <br><br> 
 ====================================================
   a)Download Raspbian official mirror:<br><br>
-  -----------------------------------------------------
   https://www.raspberrypi.org/downloads/<br>
   b)Use“SDFormatter.exe”to Format your TF Card<br>
-  -----------------------------------------------------
   c)Use“Win32DiskImager.exe” Burning mirror to TF Card<br>
-  -----------------------------------------------------
      
 2.) Clone my repo onto your pi<br><br>
 ====================================================
@@ -31,31 +28,22 @@ Update: <br><br>
 3.)According to your LCD's type, excute:
 ====================================================
 In case of 2.8" LCD<br><br>
------------------------------------------------------
   ```sudo ./LCD28-show```<br><br>
 In case of 3.2" LCD<br><br>
------------------------------------------------------
   ```sudo ./LCD32-show```<br><br>
 In case of 3.5" LCD<br><br>
------------------------------------------------------
   ```sudo ./LCD35-show```<br><br>
 In case of 3.97" LCD<br><br>
------------------------------------------------------
   ```sudo ./LCD397-show```<br><br>
 In case of 4.3" LCD<br><br>
------------------------------------------------------
   ```sudo ./LCD43-show```<br><br>
 In case of 5" LCD<br><br>
------------------------------------------------------
   ```sudo ./LCD5-show```<br><br>
 In case of 7inch(B)-800X480 RPI LCD<br><br>
------------------------------------------------------
   ```sudo ./LCD7B-show```<br><br>
 In case of 7inch(C)-1024X600 RPI LCD<br><br>
------------------------------------------------------
   ```sudo ./LCD7C-show```<br><br>
 If you need to switch back to the traditional HDMI display<br><br>
------------------------------------------------------
   ```sudo ./LCD-hdmi```<br><br>
 
 4.) Wait a few minutes,the system will restart automaticall , enjoy with your LCD.
