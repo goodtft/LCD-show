@@ -51,5 +51,5 @@ Wait a few minutes,the system will restart automaticall , enjoy with your LCD.<b
   This additional command bellow is just for Raspbian-2017-03-02:<br><br>
   ```cd LCD-show/```<br>
 ```sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb```<br>
-```sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf```<br><br>
-
+```sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf```<br>
+```sudo reboot```
