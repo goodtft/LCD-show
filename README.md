@@ -4,7 +4,8 @@ LCD driver for the Raspberry PI Installation<br>
 Update: <br><br>
 -----------------------------------------------------
   v1.2-20170302<br><br>
-  Add the command bellow to solve problem with Raspbian-2017-03-02<br><br>
+  if you are using the newest Raspbian version:2017-03-02<br><br>
+  you need to additional excute this two command bellow after Step1,2,3 excuted:
 ```sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb```<br><br>
 ```sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf```<br><br>
 
@@ -19,13 +20,13 @@ Update: <br><br>
   b)Use“SDFormatter.exe”to Format your TF Card<br>
   c)Use“Win32DiskImager.exe” Burning mirror to TF Card<br>
      
-2.) Clone my repo onto your pi<br><br>
+2.) Step2, Clone my repo onto your pi<br><br>
 ====================================================
 ```git clone https://github.com/goodtft/LCD-show.git```<br>
 ```chmod -R 755 LCD-show```<br>
 ```cd LCD-show/```<br>
   
-3.)According to your LCD's type, excute:
+3.)Step3, According to your LCD's type, excute:
 ====================================================
 In case of 2.8" LCD<br><br>
   ```sudo ./LCD28-show```<br><br>
