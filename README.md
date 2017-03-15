@@ -1,12 +1,10 @@
 LCD driver for the Raspberry PI Installation<br>
 ====================================================
 
-Update: <br><br>
------------------------------------------------------
-  v1.2-20170302<br><br>
-  Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02
-Update: <br><br>
------------------------------------------------------
+Update: <br>
+  v1.2-20170302<br>
+  Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02<br><br>
+Update: <br>
   v1.1-20160815<br><br>
   
 1.)Step1, Install Raspbian official mirror <br><br> 
@@ -46,6 +44,7 @@ If you need to switch back to the traditional HDMI display<br><br>
 Wait a few minutes,the system will restart automaticall , enjoy with your LCD.<br><br>
 
   NOTE:<br>
+  ===========================================================================================
   if you are using the newest Raspbian version:2017-03-02<br>
   you need to additional excute this two command bellow after Step1,2,3 excuted,<br>
   if not so,the Resistive touch to reverse or cannot be calibrated.<br>
