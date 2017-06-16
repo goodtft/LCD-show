@@ -55,7 +55,6 @@ enable_uart=1
 # Enable audio (loads snd_bcm2835)
 dtparam=audio=on
 max_usb_current=1
-hdmi_drive=1
 hdmi_group=2
 hdmi_mode=1
 hdmi_mode=87

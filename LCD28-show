@@ -1,4 +1,5 @@
-sudo mkdir -p /etc/X11/xorg.conf.d
+#!/bin/bash
+sudo mkdir /etc/X11/xorg.conf.d
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/tft9341.dtbo
 sudo cp -rf ./usr/99-calibration.conf-28  /etc/X11/xorg.conf.d/99-calibration.conf
@@ -6,4 +7,23 @@ sudo cp -rf ./usr/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/
 sudo cp ./usr/cmdline.txt /boot/
 sudo cp ./usr/inittab /etc/
 sudo cp ./boot/config-28.txt /boot/config.txt
+nodeplatform=`uname -n`
+kernel=`uname -r`
+version=`uname -v`
+if test "$nodeplatform" = "raspberrypi";then
+echo "this is raspberrypi kernel"
+version=${version%% *}
+version=${version#*#}
+echo $version
+if test $version -lt 970;then
+echo "reboot"
+else
+echo "need to update touch configuration"
+sudo dpkg -i -B xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb
+sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
+echo "reboot"
+fi
+else
+echo "this is not raspberrypi kernel, no need to update touch configure, reboot"
+fi
 sudo reboot

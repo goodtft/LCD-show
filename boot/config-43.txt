@@ -56,7 +56,7 @@ enable_uart=1
 dtparam=audio=on
 max_usb_current=1
 display_rotate=0
-hdmi_drive=1
+max_usb_current=1
 hdmi_group=2
 hdmi_mode=87
 hdmi_timings=480 0 1 41 2 272 0 2 10 2 0 0 0 60 0 9000000 3
