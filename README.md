@@ -32,13 +32,13 @@ In case of 3.5" GPIO Display<br>
   ```sudo ./LCD35-show```<br><br>
 In case of 3.5" HDMI Display-MPI3508<br>
   ```sudo ./MPI3508_480_320-show```<br><br>
-  or
+  or<br>
   ```sudo ./MPI3508_600_400-show```<br><br>
-  or
+  or<br>
   ```sudo ./MPI3508_720_480-show```<br><br>
-  or
+  or<br>
   ```sudo ./MPI3508_810_540-show```<br><br>
-  or
+  or<br>
   ```sudo ./MPI3508_960_640-show```<br><br>
 In case of 3.5" DPI Display-MPI3510<br>
   ```sudo ./MPI3510-show```<br><br>
