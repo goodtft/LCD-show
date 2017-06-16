@@ -28,8 +28,21 @@ In case of 2.8" LCD<br>
   ```sudo ./LCD28-show```<br><br>
 In case of 3.2" LCD<br>
   ```sudo ./LCD32-show```<br><br>
-In case of 3.5" LCD<br>
+In case of 3.5" GPIO Display<br>
   ```sudo ./LCD35-show```<br><br>
+In case of 3.5" HDMI Display-MPI3508<br>
+  ```sudo ./MPI3508_480_320-show```<br><br>
+  or
+  ```sudo ./MPI3508_600_400-show```<br><br>
+  or
+  ```sudo ./MPI3508_720_480-show```<br><br>
+  or
+  ```sudo ./MPI3508_810_540-show```<br><br>
+  or
+  ```sudo ./MPI3508_960_640-show```<br><br>
+In case of 3.5" DPI Display-MPI3510<br>
+  ```sudo ./MPI3510-show```<br><br>
+  
 In case of 3.97" LCD<br>
   ```sudo ./LCD397-show```<br><br>
 In case of 4.3" LCD<br>
