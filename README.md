@@ -18,6 +18,7 @@ Update: <br>
      
 2.) Step2, Clone my repo onto your pi<br><br>
 ====================================================
+```sudo rm -rf LCD-show```<br>
 ```git clone https://github.com/goodtft/LCD-show.git```<br>
 ```chmod -R 755 LCD-show```<br>
 ```cd LCD-show/```<br>
