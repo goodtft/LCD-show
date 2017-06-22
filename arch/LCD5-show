@@ -3,6 +3,6 @@
 sudo cp -rf ./config-5.txt /boot/config.txt
 sudo mkdir /etc/X11/xorg.conf.d
 sudo cp -rf ./99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
-yes | sudo pacman -S xinput-calibration xserver-xorg-input-evdev
+yes | sudo pacman -S xinput-calibration xf86-input-evdev
 sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
 sudo reboot
