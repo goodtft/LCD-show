@@ -1,6 +1,9 @@
 LCD driver for the Raspberry PI Installation<br>
 ====================================================
 Update: <br>
+  v1.5-20170706<br>
+  Update to support Raspbian-2017-07-05,Raspbian-2017-06-21<br><br>
+Update: <br>
   v1.3-20170612<br>
   fixed to support Raspbian-2017-03-02,Raspbian-2017-04-10<br><br>
 Update: <br>
