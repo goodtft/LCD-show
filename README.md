@@ -24,9 +24,10 @@ Update: <br>
   c)Use“Win32DiskImager.exe” Burning mirror to TF Card<br>
      
 2.) Step2, Clone my repo onto your pi<br><br>
+====================================================
 Use SSH to connect the raspberry pi, 
 And Ensure that the raspberry pi is connected to the Internet before executing the following commands:
-====================================================
+
 ```sudo rm -rf LCD-show```<br>
 ```git clone https://github.com/goodtft/LCD-show.git```<br>
 ```chmod -R 755 LCD-show```<br>
