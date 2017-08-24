@@ -1,5 +1,9 @@
 LCD driver for the Raspberry PI Installation<br>
 ====================================================
+2017-08-16
+Update: <br>
+  v1.6-20170824<br>
+  Update xserver to support Raspbian-2017-08-16<br><br>
 Update: <br>
   v1.5-20170706<br>
   Update to support Raspbian-2017-07-05,Raspbian-2017-06-21<br><br>
@@ -20,6 +24,8 @@ Update: <br>
   c)Use“Win32DiskImager.exe” Burning mirror to TF Card<br>
      
 2.) Step2, Clone my repo onto your pi<br><br>
+Use SSH to connect the raspberry pi, 
+And Ensure that the raspberry pi is connected to the Internet before executing the following commands:
 ====================================================
 ```sudo rm -rf LCD-show```<br>
 ```git clone https://github.com/goodtft/LCD-show.git```<br>
