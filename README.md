@@ -1,5 +1,12 @@
 LCD driver for the Raspberry PI Installation<br>
 ====================================================
+2017-08-16
+Update: <br>
+  v1.6-20170824<br>
+  Update xserver to support Raspbian-2017-08-16<br><br>
+Update: <br>
+  v1.5-20170706<br>
+  Update to support Raspbian-2017-07-05,Raspbian-2017-06-21<br><br>
 Update: <br>
   v1.3-20170612<br>
   fixed to support Raspbian-2017-03-02,Raspbian-2017-04-10<br><br>
@@ -9,15 +16,19 @@ Update: <br>
 Update: <br>
   v1.1-20160815<br><br>
   
-1.)Step1, Install Raspbian official mirror <br><br> 
+1.)Step1, Install Raspbian official mirror <br>
 ====================================================
   a)Download Raspbian official mirror:<br>
   https://www.raspberrypi.org/downloads/<br>
   b)Use“SDFormatter.exe”to Format your TF Card<br>
   c)Use“Win32DiskImager.exe” Burning mirror to TF Card<br>
      
-2.) Step2, Clone my repo onto your pi<br><br>
+2.) Step2, Clone my repo onto your pi<br>
 ====================================================
+Use SSH to connect the raspberry pi, <br>
+And Ensure that the raspberry pi is connected to the Internet before executing the following commands:
+-----------------------------------------------------------------------------------------------------
+
 ```sudo rm -rf LCD-show```<br>
 ```git clone https://github.com/goodtft/LCD-show.git```<br>
 ```chmod -R 755 LCD-show```<br>
@@ -57,6 +68,8 @@ In case of 7inch(C)-1024X600 RPI LCD<br>
 If you need to switch back to the traditional HDMI display<br>
   ```sudo ./LCD-hdmi```<br><br>
 
-Wait a few minutes,the system will restart automaticall , enjoy with your LCD.<br><br>
+Wait a few minutes,the system will restart automaticall , enjoy with your LCD.
+-------------------------------------------------------------------------------
+<br><br>
 
 
