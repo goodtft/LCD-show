@@ -67,7 +67,7 @@ enable_dpi_lcd=1
 display_default_lcd=1    
 dpi_group=2
 dpi_mode=87     
-dpi_output_format=0x07f003
+dpi_output_format=0x07f005
 hdmi_timings=321 0 28 18 28 480 0 2 2 4 0 0 0 60 0 32000000 6
 
 #dtoverlay=ads7846,cs=1,penirq=18,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900
