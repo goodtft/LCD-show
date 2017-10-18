@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo cp -rf ./boot/config-35DPI.txt /boot/config.txt
-sudo cp ./usr/bcm2709-rpi-2-b.dtb /boot/
-sudo cp ./usr/bcm2710-rpi-3-b.dtb /boot/ 
+#sudo cp ./usr/bcm2709-rpi-2-b.dtb /boot/
+#sudo cp ./usr/bcm2710-rpi-3-b.dtb /boot/ 
 sudo cp ./usr/cmdline.txt /boot/
 sudo cp ./usr/qddpi24.dtb /boot/overlays/
 sudo cp ./usr/qddpi24.dtb /boot/overlays/qddpi24.dtbo
