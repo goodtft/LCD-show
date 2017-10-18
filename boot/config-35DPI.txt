@@ -56,7 +56,7 @@ enable_uart=1
 dtparam=audio=on
 
 display_rotate=1 
-dtoverlay=qddpi24     
+dtoverlay=dpi24     
 overscan_left=0
 overscan_right=0
 overscan_top=0
