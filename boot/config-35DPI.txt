@@ -22,7 +22,7 @@
 #framebuffer_height=720
 
 # uncomment if hdmi display is not detected and composite is being output
-hdmi_force_hotplug=1
+#hdmi_force_hotplug=1
 
 # uncomment to force a specific HDMI mode (this will force VGA)
 #hdmi_group=1
@@ -43,10 +43,10 @@ hdmi_force_hotplug=1
 #arm_freq=800
 
 # Uncomment some or all of these to enable the optional hardware interfaces
-dtparam=i2c_arm=off
+#dtparam=i2c_arm=on
 #dtparam=i2s=on
-dtparam=spi=off
-enable_uart=1
+#dtparam=spi=on
+
 # Uncomment this to enable the lirc-rpi module
 #dtoverlay=lirc-rpi
 
@@ -56,7 +56,7 @@ enable_uart=1
 dtparam=audio=on
 
 display_rotate=1 
-dtoverlay=dpi18     
+dtoverlay=dpi18
 overscan_left=0
 overscan_right=0
 overscan_top=1
@@ -64,9 +64,9 @@ overscan_bottom=1
 framebuffer_width=480
 framebuffer_height=320
 enable_dpi_lcd=1
-display_default_lcd=1    
+display_default_lcd=1
 dpi_group=2
-dpi_mode=87     
+dpi_mode=87
 dpi_output_format=0x07f205
 hdmi_timings=320 0 28 18 28 480 0 2 2 4 0 0 0 60 0 32000000 6
 
