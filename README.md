@@ -67,7 +67,7 @@ In case of 3.97" LCD<br>
 In case of 4.3" LCD<br>
   ```sudo ./LCD43-show```<br>
 If you need to switch back to the traditional HDMI display<br>
-  ```sudo ./LCD-hdmi```<br><br>
+  ```sudo ./LCD-hdmi```<br>
 
 Wait a few minutes,the system will restart automaticall , enjoy with your LCD.
 -------------------------------------------------------------------------------
