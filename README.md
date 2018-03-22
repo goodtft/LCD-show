@@ -1,6 +1,7 @@
 LCD driver for the Raspberry PI Installation<br>
 ====================================================
-2017-08-16
+v1.7-20180320<br>
+Update to support Raspbian Version:March 2018(Release date:2018-03-13)
 Update: <br>
   v1.6-20170824<br>
   Update xserver to support Raspbian-2017-08-16<br><br>
@@ -36,13 +37,13 @@ And Ensure that the raspberry pi is connected to the Internet before executing t
   
 3.)Step3, According to your LCD's type, excute:
 ====================================================
-In case of 2.8" LCD<br>
+In case of 2.8" LCD(MPI2801)<br>
   ```sudo ./LCD28-show```<br><br>
-In case of 3.2" LCD<br>
+In case of 3.2" LCD(MPI3201)<br>
   ```sudo ./LCD32-show```<br><br>
-In case of 3.5" GPIO Display<br>
+In case of 3.5inch RPi Display(MPI3501)<br>
   ```sudo ./LCD35-show```<br><br>
-In case of 3.5" HDMI Display-MPI3508<br>
+In case of 3.5" HDMI Display-B(MPI3508)<br>
   ```sudo ./MPI3508_480_320-show```<br>
   or<br>
   ```sudo ./MPI3508_600_400-show```<br>
@@ -52,19 +53,19 @@ In case of 3.5" HDMI Display-MPI3508<br>
   ```sudo ./MPI3508_810_540-show```<br>
   or<br>
   ```sudo ./MPI3508_960_640-show```<br><br>
-In case of 3.5" DPI Display-MPI3510<br>
-  ```sudo ./MPI3510-show```<br><br>
+In case of 5inch HDMI Display-Rtouch(MPI5002)<br>
+  ```sudo ./LCD5-show```<br><br>
+In case of 7inch HDMI Display-B-800X480(MPI7001)<br>
+  ```sudo ./LCD7B-show```<br><br>
+In case of 7inch HDMI Display-C-1024X600(MPI7002)<br>
+  ```sudo ./LCD7C-show```<br><br><br>
   
+In case of 3.5" DPI Display-MPI3510<br>
+  ```sudo ./MPI3510-show```<br><br>  
 In case of 3.97" LCD<br>
   ```sudo ./LCD397-show```<br><br>
 In case of 4.3" LCD<br>
   ```sudo ./LCD43-show```<br><br>
-In case of 5" LCD<br>
-  ```sudo ./LCD5-show```<br><br>
-In case of 7inch(B)-800X480 RPI LCD<br>
-  ```sudo ./LCD7B-show```<br><br>
-In case of 7inch(C)-1024X600 RPI LCD<br>
-  ```sudo ./LCD7C-show```<br><br>
 If you need to switch back to the traditional HDMI display<br>
   ```sudo ./LCD-hdmi```<br><br>
 
