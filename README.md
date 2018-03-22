@@ -72,7 +72,7 @@ If you need to switch back to the traditional HDMI display<br>
 Wait a few minutes,the system will restart automaticall , enjoy with your LCD.
 -------------------------------------------------------------------------------
 The LCD-show.tar.gz also can be download from:
-http://www.hellolcd.com/wiki/images/7/73/LCD-show.tar.gz
+http://www.hellolcd.com/wiki/LCD-show
 <br><br>
 
 
