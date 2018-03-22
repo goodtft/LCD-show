@@ -13,7 +13,7 @@ Update: <br>
   fixed to support Raspbian-2017-03-02,Raspbian-2017-04-10<br>
 Update: <br>
   v1.2-20170302<br>
-  Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02<br><br>
+  Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02<br>
 Update: <br>
   v1.1-20160815<br><br>
   
@@ -61,11 +61,11 @@ In case of 7inch HDMI Display-C-1024X600(MPI7002)<br>
   ```sudo ./LCD7C-show```<br><br><br>
   
 In case of 3.5" DPI Display-MPI3510<br>
-  ```sudo ./MPI3510-show```<br><br>  
+  ```sudo ./MPI3510-show```<br>  
 In case of 3.97" LCD<br>
-  ```sudo ./LCD397-show```<br><br>
+  ```sudo ./LCD397-show```<br>
 In case of 4.3" LCD<br>
-  ```sudo ./LCD43-show```<br><br>
+  ```sudo ./LCD43-show```<br>
 If you need to switch back to the traditional HDMI display<br>
   ```sudo ./LCD-hdmi```<br><br>
 
