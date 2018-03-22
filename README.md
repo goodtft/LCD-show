@@ -1,16 +1,16 @@
 LCD driver for the Raspberry PI Installation<br>
 ====================================================
 v1.7-20180320<br>
-Update to support Raspbian Version:March 2018(Release date:2018-03-13)
+Update to support Raspbian Version:March 2018(Release date:2018-03-13)<br>
 Update: <br>
   v1.6-20170824<br>
-  Update xserver to support Raspbian-2017-08-16<br><br>
+  Update xserver to support Raspbian-2017-08-16<br>
 Update: <br>
   v1.5-20170706<br>
-  Update to support Raspbian-2017-07-05,Raspbian-2017-06-21<br><br>
+  Update to support Raspbian-2017-07-05,Raspbian-2017-06-21<br>
 Update: <br>
   v1.3-20170612<br>
-  fixed to support Raspbian-2017-03-02,Raspbian-2017-04-10<br><br>
+  fixed to support Raspbian-2017-03-02,Raspbian-2017-04-10<br>
 Update: <br>
   v1.2-20170302<br>
   Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02<br><br>
