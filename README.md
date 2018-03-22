@@ -61,7 +61,7 @@ In case of 7inch HDMI Display-C-1024X600(MPI7002)<br>
   ```sudo ./LCD7C-show```<br><br><br>
   
 In case of 3.5" DPI Display-MPI3510<br>
-  ```sudo ./MPI3510-show```<br>  
+  ```sudo ./MPI3510-show```<br>
 In case of 3.97" LCD<br>
   ```sudo ./LCD397-show```<br>
 In case of 4.3" LCD<br>
