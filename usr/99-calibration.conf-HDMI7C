@@ -1,0 +1,6 @@
+Section "InputClass"
+        Identifier      "calibration"
+        MatchProduct    "深圳市全动电子技术有限公司 ByQDtech 触控USB鼠标"
+        Option  "Calibration"   "0 1024 0 600"
+        Option  "SwapAxes"      "0"
+EndSection
