@@ -56,6 +56,7 @@ enable_uart=1
 dtparam=audio=on
 max_usb_current=1
 hdmi_force_hotplug=1
+config_hdmi_boost=7
 hdmi_group=2
 hdmi_mode=1
 hdmi_mode=87
