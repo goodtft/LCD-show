@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo rm -rf /etc/X11/xorg.conf.d/40-libinput.conf
 sudo cp -rf ./boot/config-35-480X320.txt /boot/config.txt 
 if [ -b /dev/mmcblk0p7 ]; then
 sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt

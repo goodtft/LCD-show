@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo rm -rf /etc/X11/xorg.conf.d/40-libinput.conf
 sudo mkdir /etc/X11/xorg.conf.d
 sudo cp ./usr/tft35a-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft35a-overlay.dtb /boot/overlays/tft35a.dtbo

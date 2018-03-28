@@ -3,7 +3,7 @@ sudo rm -rf /etc/X11/xorg.conf.d/40-libinput.conf
 sudo mkdir /etc/X11/xorg.conf.d
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/tft9341.dtbo
-sudo cp -rf ./usr/99-calibration.conf-32  /etc/X11/xorg.conf.d/99-calibration.conf
+sudo cp -rf ./usr/99-calibration.conf-24  /etc/X11/xorg.conf.d/99-calibration.conf
 sudo cp -rf ./usr/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/
 if [ -b /dev/mmcblk0p7 ]; then
 sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
@@ -11,7 +11,7 @@ else
 sudo cp ./usr/cmdline.txt /boot/
 fi
 sudo cp ./usr/inittab /etc/
-sudo cp ./boot/config-32.txt /boot/config.txt
+sudo cp ./boot/config-28.txt /boot/config.txt
 nodeplatform=`uname -n`
 kernel=`uname -r`
 version=`uname -v`
