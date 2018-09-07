@@ -1,8 +1,8 @@
 #!/bin/bash
 sudo rm -rf /etc/X11/xorg.conf.d/40-libinput.conf
 sudo mkdir /etc/X11/xorg.conf.d
-sudo cp ./usr/MHS35-overlay.dtb /boot/overlays/
-sudo cp ./usr/MHS35-overlay.dtb /boot/overlays/mhs35.dtbo
+sudo cp ./usr/mhs35-overlay.dtb /boot/overlays/
+sudo cp ./usr/mhs35-overlay.dtb /boot/overlays/mhs35.dtbo
 sudo cp -rf ./usr/99-calibration.conf-35  /etc/X11/xorg.conf.d/99-calibration.conf
 sudo cp -rf ./usr/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/
 if [ -b /dev/mmcblk0p7 ]; then
@@ -11,7 +11,7 @@ else
 sudo cp ./usr/cmdline.txt /boot/
 fi
 sudo cp ./usr/inittab /etc/
-sudo cp ./boot/config-MHS35.txt /boot/config.txt
+sudo cp ./boot/config-mhs35.txt /boot/config.txt
 nodeplatform=`uname -n`
 kernel=`uname -r`
 version=`uname -v`
