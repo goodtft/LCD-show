@@ -1,5 +1,8 @@
 LCD driver for the Raspberry PI Installation<br>
 ====================================================
+v1.8-20180907<br>
+Update to support MHS35<br>
+Update: <br>
 v1.7-20180320<br>
 Update to support Raspbian Version:March 2018(Release date:2018-03-13)<br>
 Update: <br>
@@ -47,6 +50,8 @@ In case of 3.5inch RPi Display(MPI3501)<br>
   ```sudo ./LCD35-show```<br><br>
 In case of 3.5" HDMI Display-B(MPI3508)<br>
   ```sudo ./MPI3508-show```<br><br>
+In case of 3.5" High Speed display(MHS35)<br>
+  ```sudo ./MHS35-show```<br><br>
 In case of 4.0" HDMI Display(MPI4008)<br>
   ```sudo ./MPI4008-show```<br><br>
 In case of 5inch HDMI Display-B(Capacitor touch)(MPI5001):<br>
