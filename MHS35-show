@@ -4,7 +4,7 @@ sudo mkdir -p /etc/X11/xorg.conf.d
 sudo cp ./usr/mhs35-overlay.dtb /boot/overlays/
 sudo cp ./usr/mhs35-overlay.dtb /boot/overlays/mhs35.dtbo
 sudo cp -rf ./usr/99-calibration.conf-mhs35  /etc/X11/xorg.conf.d/99-calibration.conf
-sudo cp -rf ./usr/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/
+sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/
 if [ -b /dev/mmcblk0p7 ]; then
 sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
 else
