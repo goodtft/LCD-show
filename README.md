@@ -54,8 +54,12 @@ In case of 3.5inch RPi Display(MPI3501)<br>
   ```sudo ./LCD35-show```<br><br>
 In case of 3.5" HDMI Display-B(MPI3508)<br>
   ```sudo ./MPI3508-show```<br><br>
+ In case of 3.2" High Speed display(MHS32)<br>
+  ```sudo ./MHS32-show```<br><br>
 In case of 3.5" High Speed display(MHS35)<br>
   ```sudo ./MHS35-show```<br><br>
+In case of 4.0" High Speed display(MHS40)<br>
+  ```sudo ./MHS40-show```<br><br>
 In case of 4.0" HDMI Display(MPI4008)<br>
   ```sudo ./MPI4008-show```<br><br>
 In case of 5inch HDMI Display-B(Capacitor touch)(MPI5001):<br>
