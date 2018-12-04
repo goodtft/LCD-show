@@ -1,5 +1,9 @@
 LCD driver for the Raspberry PI Installation<br>
 ====================================================
+Update: <br>
+v1.9-20180320<br>
+Update to support MHS40 & MHS32<br>
+Update: <br>
 v1.8-20180907<br>
 Update to support MHS35<br>
 Update: <br>
