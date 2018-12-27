@@ -1,0 +1,9 @@
+Section "InputClass"
+        Identifier      "calibration"
+        MatchProduct    "ADS7846 Touchscreen"
+        Option  "Calibration"   "3697 135 136 3839"
+        Option  "SwapAxes"      "1"
+        Option "EmulateThirdButton" "1"
+        Option "EmulateThirdButtonTimeout" "1000"
+        Option "EmulateThirdButtonMoveThreshold" "300"
+EndSection
