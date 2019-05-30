@@ -22,7 +22,7 @@
 #framebuffer_height=720
 
 # uncomment if hdmi display is not detected and composite is being output
-hdmi_force_hotplug=1
+#hdmi_force_hotplug=1
 
 # uncomment to force a specific HDMI mode (this will force VGA)
 #hdmi_group=1
@@ -55,6 +55,7 @@ enable_uart=1
 # Enable audio (loads snd_bcm2835)
 dtparam=audio=on
 max_usb_current=1
+display_rotate=0
 hdmi_force_hotplug=1
 config_hdmi_boost=7
 hdmi_group=2

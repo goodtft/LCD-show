@@ -22,7 +22,7 @@
 #framebuffer_height=720
 
 # uncomment if hdmi display is not detected and composite is being output
-hdmi_force_hotplug=1
+#hdmi_force_hotplug=1
 
 # uncomment to force a specific HDMI mode (this will force VGA)
 #hdmi_group=1
@@ -61,5 +61,6 @@ config_hdmi_boost=7
 hdmi_group=2
 hdmi_mode=1
 hdmi_mode=87
+hdmi_drive=2
 hdmi_cvt 480 800 60 6 0 0 0
 dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900
