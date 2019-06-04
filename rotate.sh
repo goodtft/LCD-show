@@ -44,6 +44,8 @@ output_type=`cat $cur_dir/.have_installed | awk -F ':' '{printf $1}'`
 touch_type=`cat $cur_dir/.have_installed | awk -F ':' '{printf $2}'`
 device_id=`cat $cur_dir/.have_installed | awk -F ':' '{printf $3}'`
 default_value=`cat $cur_dir/.have_installed | awk -F ':' '{printf $4}'`
+width=`cat $cur_dir/.have_installed | awk -F ':' '{printf $5}'`
+height=`cat $cur_dir/.have_installed | awk -F ':' '{printf $6}'`
 
 if [ $output_type = "hdmi" ]; then
 result=`grep -rn "^display_rotate=" /boot/config.txt | tail -n 1`
@@ -106,9 +108,9 @@ resultr=`grep -rn "^hdmi_cvt" /boot/config.txt | tail -n 1 | awk -F' ' '{print $
 liner=`echo -n $resultr | awk -F: '{printf $1}'`
 strr=`echo -n $resultr | awk -F: '{printf $2}'`
 if [ $new_rotate_value -eq $default_value ] || [ $new_rotate_value -eq $[($default_value+180+360)%360] ]; then
-sudo sed -i -e ''"$liner"'s/'"$strr"'/hdmi_cvt 480 320/' /boot/config.txt
+sudo sed -i -e ''"$liner"'s/'"$strr"'/hdmi_cvt '"$width"' '"$height"'/' /boot/config.txt
 elif [ $new_rotate_value -eq $[($default_value-90+360)%360] ] || [ $new_rotate_value -eq $[($default_value+90+360)%360] ]; then
-sudo sed -i -e ''"$liner"'s/'"$strr"'/hdmi_cvt 320 480/' /boot/config.txt
+sudo sed -i -e ''"$liner"'s/'"$strr"'/hdmi_cvt '"$height"' '"$width"'/' /boot/config.txt
 fi
 fi
 

@@ -33,7 +33,7 @@ sudo mkdir /etc/X11/xorg.conf.d
 fi
 sudo cp -rf ./usr/99-calibration.conf-397-270 /etc/X11/xorg.conf.d/99-calibration.conf 
 sudo touch ./.have_installed
-echo "hdmi:resistance:397:270" > ./.have_installed
+echo "hdmi:resistance:397:270:480:800" > ./.have_installed
 
 nodeplatform=`uname -n`
 kernel=`uname -r`

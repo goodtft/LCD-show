@@ -25,7 +25,7 @@ sudo mkdir /etc/X11/xorg.conf.d
 fi
 sudo cp ./usr/40-libinput.conf-0 /etc/X11/xorg.conf.d/40-libinput.conf
 sudo touch ./.have_installed
-echo "hdmi:capacity:MPI5001:0" > ./.have_installed
+echo "hdmi:capacity:MPI5001:0:800:480" > ./.have_installed
 sudo sync
 sudo sync
 sleep 1

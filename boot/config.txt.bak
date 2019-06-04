@@ -58,7 +58,7 @@ hdmi_force_hotplug=1
 dtparam=i2c_arm=on
 dtparam=spi=on
 enable_uart=1
-dtoverlay=mhs35:rotate=90
+dtoverlay=mhs32:rotate=270
 hdmi_group=2
 hdmi_mode=1
 hdmi_mode=87
