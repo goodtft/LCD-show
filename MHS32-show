@@ -35,7 +35,7 @@ sudo cp ./usr/inittab /etc/
 sudo touch ./.have_installed
 echo "gpio:resistance:mhs32:270:480:320" > ./.have_installed
 #FBCP install
-wget --spider -q -o /dev/null --tries=1 -T 3 https://github.com
+wget --spider -q -o /dev/null --tries=1 -T 10 https://github.com
 if [ $? -eq 0 ]; then
 sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
 sudo cp -rf ./etc/rc.local /etc/rc.local
