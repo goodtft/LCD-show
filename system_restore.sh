@@ -79,6 +79,9 @@ if [ -f ./.system_backup/45-evdev.conf ]; then
 sudo cp -rf ./.system_backup/45-evdev.conf /usr/share/X11/xorg.conf.d
 fi
 
+if [ -f ./.have_installed ]; then
+sudo rm -rf ./.have_installed
+fi
 if [ -f ./.system_backup/.have_installed ]; then
 sudo cp -rf ./.system_backup/.have_installed ./
 fi
