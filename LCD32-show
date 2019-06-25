@@ -34,10 +34,10 @@ kernel=`uname -r`
 version=`uname -v`
 if test "$nodeplatform" = "raspberrypi";then
 echo "this is raspberrypi kernel"
-version=${version%% *}
-version=${version#*#}
+version=${version##* }
+#version=${version#*#}
 echo $version
-if test $version -lt 970;then
+if test $version -lt 2017;then
 echo "reboot"
 else
 echo "need to update touch configuration"
