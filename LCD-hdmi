@@ -1,10 +1,20 @@
-sudo cp -rf ./usr/modules-HDMI  /etc/modules
-sudo cp -rf ./usr/99-fbturbo.conf-HDMI  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
-sudo cp ./boot/config-nomal.txt /boot/config.txt
-if [ -b /dev/mmcblk0p7 ]; then
-sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
-else
-sudo cp ./usr/cmdline.txt /boot/
+#!/bin/bash
+
+dev=`grep -rn "Option" /usr/share/X11/xorg.conf.d/99-fbturbo.conf | grep "fbdev" |awk -F\" '{printf $4}'`
+if test "$dev" = "/dev/fb0";then
+echo "The system is already output for HDMI and does not need to be set up any more"
+exit
 fi
-sudo cp ./usr/inittab /etc/
+sudo ./system_backup.sh
+
+#sudo cp -rf ./usr/modules-HDMI  /etc/modules
+#sudo cp -rf ./usr/99-fbturbo.conf-HDMI  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+#sudo cp ./boot/config-nomal.txt /boot/config.txt
+#if [ -b /dev/mmcblk0p7 ]; then
+#sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
+#else
+#sudo cp ./usr/cmdline.txt /boot/
+#fi
+#sudo cp ./usr/inittab /etc/
+echo "reboot now"
 sudo reboot

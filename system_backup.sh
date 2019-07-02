@@ -76,4 +76,5 @@ fi
 
 if [ -f ./.have_installed ]; then
 sudo cp -rf ./.have_installed ./.system_backup
+sudo rm -rf ./.have_installed
 fi
