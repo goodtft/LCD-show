@@ -34,11 +34,11 @@ sudo cp ./usr/inittab /etc/
 sudo touch ./.have_installed
 echo "gpio:resistance:32:270:320:240" > ./.have_installed
 #evdev install
-nodeplatform=`uname -n`
-kernel=`uname -r`
+#nodeplatform=`uname -n`
+#kernel=`uname -r`
 version=`uname -v`
-if test "$nodeplatform" = "raspberrypi";then
-echo "this is raspberrypi kernel"
+#if test "$nodeplatform" = "raspberrypi";then
+#echo "this is raspberrypi kernel"
 version=${version##* }
 #version=${version#*#}
 echo $version
@@ -54,9 +54,9 @@ grep -q "error:" ./error_output.txt && exit
 sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
 #echo "reboot"
 fi
-else
-echo "this is not raspberrypi kernel, no need to update touch configure, reboot"
-fi
+#else
+#echo "this is not raspberrypi kernel, no need to update touch configure, reboot"
+#fi
 
 sudo sync
 sudo sync
