@@ -1,8 +1,13 @@
 #!/bin/bash
 sudo ./system_backup.sh
 
+root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
+if test "$root_dev" = "/dev/mmcblk0p7";then
+sudo cp -rf ./boot/config-noobs-nomal.txt ./boot/config.txt.bak
+else
 sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
 sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
+fi
 sudo echo "hdmi_force_edid_audio=1" >> ./boot/config.txt.bak
 sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
 sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
@@ -19,7 +24,7 @@ sudo echo "dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
 #sudo cp -rf ./boot/config-35-480X320.txt /boot/config.txt 
-if [ -b /dev/mmcblk0p7 ]; then
+if test "$root_dev" = "/dev/mmcblk0p7";then
 sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
 else
 sudo cp ./usr/cmdline.txt /boot/

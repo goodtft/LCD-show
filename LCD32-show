@@ -10,8 +10,13 @@ sudo mkdir -p /etc/X11/xorg.conf.d
 fi
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft9341-overlay.dtb /boot/overlays/tft9341.dtbo
+root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
+if test "$root_dev" = "/dev/mmcblk0p7";then
+sudo cp -rf ./boot/config-noobs-nomal.txt ./boot/config.txt.bak
+else
 sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
 sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
+fi
 sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
 sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
 sudo echo "enable_uart=1" >> ./boot/config.txt.bak
@@ -19,7 +24,7 @@ sudo echo "dtoverlay=tft9341:rotate=270" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 sudo cp -rf ./usr/99-calibration.conf-32-270  /etc/X11/xorg.conf.d/99-calibration.conf
 sudo cp -rf ./usr/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
-if [ -b /dev/mmcblk0p7 ]; then
+if test "$root_dev" = "/dev/mmcblk0p7";then
 sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
 else
 sudo cp ./usr/cmdline.txt /boot/

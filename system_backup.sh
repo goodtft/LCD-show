@@ -33,12 +33,18 @@ sudo rm -rf /boot/overlays/$str.dtbo
 fi
 fi
 
+root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
 sudo cp -rf /boot/config.txt ./.system_backup
+sudo cp -rf /boot/cmdline.txt ./.system_backup/
+if test "$root_dev" = "/dev/mmcblk0p7";then
+sudo cp -rf ./boot/config-noobs-nomal.txt /boot/config.txt
+sudo cp -rf ./usr/cmdline.txt-noobs-original /boot/cmdline.txt
+else
 sudo cp -rf ./boot/config-nomal.txt /boot/config.txt
+sudo cp -rf ./usr/cmdline.txt-original /boot/cmdline.txt
+fi
 sudo cp -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf ./.system_backup/
 sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo.conf
-sudo cp -rf /boot/cmdline.txt ./.system_backup/
-sudo cp -rf ./usr/cmdline.txt-original /boot/cmdline.txt
 sudo cp -rf /etc/rc.local ./.system_backup/
 sudo cp -rf ./etc/rc.local-original /etc/rc.local
 
