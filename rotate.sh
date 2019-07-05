@@ -117,44 +117,44 @@ fi
 fi
 
 #setting touch screen rotate
-if [ $touch_type = "resistance" ]; then 
+if [ $touch_type = "resistance" ]; then
 if [ $new_rotate_value -eq 0 ]; then
-cp $cur_dir/usr/99-calibration.conf-$device_id-0 /etc/X11/xorg.conf.d/99-calibration.conf
+sudo cp $cur_dir/usr/99-calibration.conf-$device_id-0 /etc/X11/xorg.conf.d/99-calibration.conf
 echo "LCD rotate value is set to $1"
 elif [ $new_rotate_value -eq 90 ]; then
-cp $cur_dir/usr/99-calibration.conf-$device_id-90 /etc/X11/xorg.conf.d/99-calibration.conf
+sudo cp $cur_dir/usr/99-calibration.conf-$device_id-90 /etc/X11/xorg.conf.d/99-calibration.conf
 echo "LCD rotate value is set to $1"
 elif [ $new_rotate_value -eq 180 ]; then
-cp $cur_dir/usr/99-calibration.conf-$device_id-180 /etc/X11/xorg.conf.d/99-calibration.conf
+sudo cp $cur_dir/usr/99-calibration.conf-$device_id-180 /etc/X11/xorg.conf.d/99-calibration.conf
 echo "LCD rotate value is set to $1"
 elif [ $new_rotate_value -eq 270 ]; then
-cp $cur_dir/usr/99-calibration.conf-$device_id-270 /etc/X11/xorg.conf.d/99-calibration.conf
+sudo cp $cur_dir/usr/99-calibration.conf-$device_id-270 /etc/X11/xorg.conf.d/99-calibration.conf
 echo "LCD rotate value is set to $1"
 elif [ $new_rotate_value -eq 360 ]; then
-cp $cur_dir/usr/99-calibration.conf-$device_id-FLIP-H /etc/X11/xorg.conf.d/99-calibration.conf
+sudo cp $cur_dir/usr/99-calibration.conf-$device_id-FLIP-H /etc/X11/xorg.conf.d/99-calibration.conf
 echo "LCD rotate value is set to flip horizontally"
 elif [ $new_rotate_value -eq 450 ]; then
-cp $cur_dir/usr/99-calibration.conf-$device_id-FLIP-V /etc/X11/xorg.conf.d/99-calibration.conf
+sudo cp $cur_dir/usr/99-calibration.conf-$device_id-FLIP-V /etc/X11/xorg.conf.d/99-calibration.conf
 echo "LCD rotate value is set to flip vertically"
 fi
 elif [ $touch_type = "capacity" ]; then
 if [ $new_rotate_value -eq 0 ]; then
-cp $cur_dir/usr/40-libinput.conf-0 /etc/X11/xorg.conf.d/40-libinput.conf
+sudo cp $cur_dir/usr/40-libinput.conf-0 /etc/X11/xorg.conf.d/40-libinput.conf
 echo "LCD rotate value is set to $1"
 elif [ $new_rotate_value -eq 90 ]; then
-cp $cur_dir/usr/40-libinput.conf-90 /etc/X11/xorg.conf.d/40-libinput.conf
+sudo cp $cur_dir/usr/40-libinput.conf-90 /etc/X11/xorg.conf.d/40-libinput.conf
 echo "LCD rotate value is set to $1"
 elif [ $new_rotate_value -eq 180 ]; then
-cp $cur_dir/usr/40-libinput.conf-180 /etc/X11/xorg.conf.d/40-libinput.conf
+sudo cp $cur_dir/usr/40-libinput.conf-180 /etc/X11/xorg.conf.d/40-libinput.conf
 echo "LCD rotate value is set to $1"
 elif [ $new_rotate_value -eq 270 ]; then
-cp $cur_dir/usr/40-libinput.conf-270 /etc/X11/xorg.conf.d/40-libinput.conf
+sudo cp $cur_dir/usr/40-libinput.conf-270 /etc/X11/xorg.conf.d/40-libinput.conf
 echo "LCD rotate value is set to $1"
 elif [ $new_rotate_value -eq 360 ]; then
-cp $cur_dir/usr/40-libinput.conf-FLIP-H /etc/X11/xorg.conf.d/40-libinput.conf
+sudo cp $cur_dir/usr/40-libinput.conf-FLIP-H /etc/X11/xorg.conf.d/40-libinput.conf
 echo "LCD rotate value is set to flip horizontally"
 elif [ $new_rotate_value -eq 450 ]; then
-cp $cur_dir/usr/40-libinput.conf-FLIP-V /etc/X11/xorg.conf.d/40-libinput.conf
+sudo cp $cur_dir/usr/40-libinput.conf-FLIP-V /etc/X11/xorg.conf.d/40-libinput.conf
 echo "LCD rotate value is set to flip vertically"
 fi
 else
@@ -168,4 +168,3 @@ sudo sync
 echo "reboot now"
 sleep 1
 sudo reboot
-
