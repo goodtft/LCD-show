@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -eu
+
 if [ ! -d "./.system_backup" ]; then
 sudo mkdir ./.system_backup
 fi

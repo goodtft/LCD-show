@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -eu
+
 sudo rm -rf /etc/X11/xorg.conf.d/40-libinput.conf
 sudo mkdir -p /etc/X11/xorg.conf.d
 sudo cp ./usr/mhs24-overlay.dtb /boot/overlays/

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -eu
+
 #Just finished the system, no need to restore
 if [ ! -d "./.system_backup" ]; then
 echo "The system is the original version and does not need to be restored"

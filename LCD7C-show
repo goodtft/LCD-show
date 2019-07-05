@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 sudo ./system_backup.sh
 
 root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`

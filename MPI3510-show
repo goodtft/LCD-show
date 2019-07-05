@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -eu
+
 sudo cp -rf ./boot/config-35DPI.txt /boot/config.txt
 #sudo cp ./usr/bcm2709-rpi-2-b.dtb /boot/
 #sudo cp ./usr/bcm2710-rpi-3-b.dtb /boot/ 

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -eu
+
 sudo ./system_backup.sh
 
 hw_version=`tr -d '\0' < /proc/device-tree/model`

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 sudo ./system_backup.sh
 
 if [ -f /etc/X11/xorg.conf.d/40-libinput.conf ]; then

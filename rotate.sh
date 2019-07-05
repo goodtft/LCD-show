@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -eu
+
 cur_dir=`pwd`
 if [ ! -f $cur_dir/.have_installed ]; then
 echo "Please install the LCD driver first"
