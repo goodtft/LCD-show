@@ -7,22 +7,22 @@ if test "$root_dev" = "/dev/mmcblk0p7";then
 sudo cp -rf ./boot/config-noobs-nomal.txt ./boot/config.txt.bak
 else
 sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
-sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
+sudo sh -c 'echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak'
 fi
-sudo echo "hdmi_force_edid_audio=1" >> ./boot/config.txt.bak
-sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
-sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
-sudo echo "enable_uart=1" >> ./boot/config.txt.bak
-sudo echo "display_rotate=0" >> ./boot/config.txt.bak
-sudo echo "max_usb_current=1" >> ./boot/config.txt.bak
-sudo echo "config_hdmi_boost=7" >> ./boot/config.txt.bak
-sudo echo "hdmi_group=2" >> ./boot/config.txt.bak
-sudo echo "hdmi_mode=1" >> ./boot/config.txt.bak
-sudo echo "hdmi_mode=87" >> ./boot/config.txt.bak
-sudo echo "hdmi_drive=2" >> ./boot/config.txt.bak
-sudo echo "hdmi_cvt 480 320 60 6 0 0 0" >> ./boot/config.txt.bak
-sudo echo "dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900" >> ./boot/config.txt.bak
-[[ $hw_version =~ "Raspberry Pi 4" ]] && sudo echo "hdmi_timings=600 0 20 28 48 400 0 13 3 32 0 0 0 30 0 25000000 5" >> ./boot/config.txt.bak
+sudo sh -c 'echo "hdmi_force_edid_audio=1" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "dtparam=spi=on" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "enable_uart=1" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "display_rotate=0" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "max_usb_current=1" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "config_hdmi_boost=7" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "hdmi_group=2" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "hdmi_mode=1" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "hdmi_mode=87" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "hdmi_drive=2" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "hdmi_cvt 480 320 60 6 0 0 0" >> ./boot/config.txt.bak'
+sudo sh -c 'echo "dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900" >> ./boot/config.txt.bak'
+[[ $hw_version =~ "Raspberry Pi 4" ]] && sudo sh -c 'echo "hdmi_timings=600 0 20 28 48 400 0 13 3 32 0 0 0 30 0 25000000 5" >> ./boot/config.txt.bak'
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
 #sudo cp -rf ./boot/config-35-480X320.txt /boot/config.txt 
@@ -37,7 +37,7 @@ if [ ! -d /etc/X11/xorg.conf.d ]; then
 sudo mkdir /etc/X11/xorg.conf.d 
 fi
 sudo cp -rf ./usr/99-calibration.conf-3508-0 /etc/X11/xorg.conf.d/99-calibration.conf
-sudo touch ./.have_installed
+touch ./.have_installed
 echo "hdmi:resistance:3508:0:480:320" > ./.have_installed
 #nodeplatform=`uname -n`
 #kernel=`uname -r`
