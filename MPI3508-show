@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo ./system_backup.sh
 
+hw_version=`tr -d '\0' < /proc/device-tree/model`
 root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
 if test "$root_dev" = "/dev/mmcblk0p7";then
 sudo cp -rf ./boot/config-noobs-nomal.txt ./boot/config.txt.bak
@@ -21,6 +22,7 @@ sudo echo "hdmi_mode=87" >> ./boot/config.txt.bak
 sudo echo "hdmi_drive=2" >> ./boot/config.txt.bak
 sudo echo "hdmi_cvt 480 320 60 6 0 0 0" >> ./boot/config.txt.bak
 sudo echo "dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900" >> ./boot/config.txt.bak
+[[ $hw_version =~ "Raspberry Pi 4" ]] && sudo echo "hdmi_timings=600 0 20 28 48 400 0 13 3 32 0 0 0 30 0 25000000 5" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
 #sudo cp -rf ./boot/config-35-480X320.txt /boot/config.txt 
