@@ -43,7 +43,9 @@ else
 sudo cp -rf ./boot/config-nomal.txt /boot/config.txt
 #sudo cp -rf ./usr/cmdline.txt-original /boot/cmdline.txt
 fi
+if [ -f /usr/share/X11/xorg.conf.d/99-fbturbo.conf ]; then
 sudo cp -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf ./.system_backup/
+fi
 sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo.conf
 sudo cp -rf /etc/rc.local ./.system_backup/
 sudo cp -rf ./etc/rc.local-original /etc/rc.local
