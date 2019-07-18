@@ -58,7 +58,7 @@ sudo cp -rf /etc/inittab ./.system_backup
 sudo rm -rf /etc/inittab
 fi
 
-type fbcp > /dev/null 2>&1
+type fbcp > /dev/null 2>&1 && :
 if [ $? -eq 0 ]; then
 sudo touch ./.system_backup/have_fbcp
 sudo rm -rf /usr/local/bin/fbcp
