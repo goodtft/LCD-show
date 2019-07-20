@@ -1,7 +1,7 @@
 ### Install drivers in the Ubuntu system
 https://github.com/lcdwiki/LCD-show-ubuntu
 
-### Install drivers in the Ubuntu Kali system
+### Install drivers in the Kali system
 https://github.com/lcdwiki/LCD-show-kali
 
 ### Install drivers in the RetroPie system
