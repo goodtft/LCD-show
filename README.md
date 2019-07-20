@@ -1,4 +1,15 @@
-LCD driver for the Raspberry PI Installation<br>
+### Install drivers in the Ubuntu system
+https://github.com/lcdwiki/LCD-show-ubuntu
+
+### Install drivers in the Ubuntu Kali system
+https://github.com/lcdwiki/LCD-show-kali
+
+### Install drivers in the RetroPie system
+https://github.com/lcdwiki/LCD-show-retropie
+
+
+
+Install drivers in the Raspbian system<br>
 ====================================================
 Update: <br>
   v2.0-20190704<br>
@@ -26,7 +37,6 @@ Update: <br>
   Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02<br>
 Update: <br>
   v1.1-20160815<br><br>
-
 
 
 # How to install the LCD driver of Raspberry Pi
