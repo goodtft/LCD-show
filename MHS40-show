@@ -70,7 +70,7 @@ if test $version -lt 2017;then
 echo "reboot"
 else
 echo "need to update touch configuration"
-sudo dpkg -i -B ./xserver-xorg-input-evdev_2.10.5-1_armhf.deb 2> error_output.txt
+sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.5-1_armhf.deb 2> error_output.txt
 #sudo apt-get install xserver-xorg-input-evdev  2> error_output.txt
 result=`cat ./error_output.txt`
 echo -e "\033[31m$result\033[0m"
