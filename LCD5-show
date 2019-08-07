@@ -9,6 +9,9 @@ else
 sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
 sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
 fi
+row=`grep -nr "#dtoverlay=vc4-fkms-v3d" ./boot/config.txt.bak | awk -F ':' '{if(NR==1)printf $1}'`
+sudo sed -i -e ''"$row"'s/#dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-fkms-v3d/' ./boot/config.txt.bak
+sudo sed -i -e 's/#max_framebuffers=2/max_framebuffers=2/' ./boot/config.txt.bak
 sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
 sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
 sudo echo "enable_uart=1" >> ./boot/config.txt.bak
@@ -21,6 +24,7 @@ sudo echo "hdmi_mode=87" >> ./boot/config.txt.bak
 sudo echo "hdmi_drive=1" >> ./boot/config.txt.bak
 sudo echo "hdmi_cvt 800 480 60 6 0 0 0" >> ./boot/config.txt.bak
 sudo echo "dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900" >> ./boot/config.txt.bak
+
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
 #sudo cp -rf ./boot/config-5.txt /boot/config.txt 
