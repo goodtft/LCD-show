@@ -12,6 +12,9 @@ https://github.com/lcdwiki/LCD-show-retropie
 Install drivers in the Raspbian system<br>
 ====================================================
 Update: <br>
+  v2.1-20191106<br>
+  Update to support MHS35B<br>
+Update: <br>
   v2.0-20190704<br>
   Update to support rotate the display direction<br>
 Update: <br>
@@ -118,7 +121,14 @@ sudo ./MHS35-show
 ### WIKI:
 CN: http://www.lcdwiki.com/zh/MHS-3.5inch_RPi_Display  <br>
 EN:http://www.lcdwiki.com/MHS-3.5inch_RPi_Display
-    
+
+# MHS-3.5” RPi Display-B(MHS35XX):
+### Driver install:
+sudo ./MHS35B-show
+### WIKI:
+CN: http://www.lcdwiki.com/zh/MHS-3.5inch_RPi_Display-B  <br>
+EN:http://www.lcdwiki.com/MHS-3.5inch_RPi_Display-B
+
 # 4.0" HDMI Display(MPI4008):
 ### Driver install:
 sudo ./MPI4008-show
