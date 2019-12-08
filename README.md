@@ -35,7 +35,7 @@ cd LCD-show/
 * `sudo ./LCD24-show`
 #### WIKI:
 * CN: http://www.lcdwiki.com/zh/2.4inch_RPi_Display
-* * EN: http://www.lcdwiki.com/2.4inch_RPi_Display
+* EN: http://www.lcdwiki.com/2.4inch_RPi_Display
  
 ## 2.4 inch RPi Display For RPi 3A+ (MPI2411):
 #### Driver install:
@@ -171,32 +171,22 @@ After execution, the system will automatically restart and the driver will be in
 `XXX-show` can be changed to the corresponding driver, and `90` can be changed to `0`, `90`, `180` or `270`, representing rotation angles of 0 degrees, 90 degrees, 180 degrees, 270 degrees, respecitively.
 
 # Change Log
-Update:
-  v2.1-20191106
-  Update to support MHS35B
-Update:
-  v2.0-20190704
-  Update to support rotate the display direction
-Update:
-  v1.9-20181204
-  Update to support MHS40 & MHS32
-Update:
-  v1.8-20180907
-  Update to support MHS35
-Update:
-  v1.7-20180320
-  Update to support Raspbian Version: March 2018(Release date:2018-03-13)
-Update:
-  v1.6-20170824
-  Update xserver to support Raspbian-2017-08-16
-Update:
-  v1.5-20170706
-  Update to support Raspbian-2017-07-05, Raspbian-2017-06-21
-Update:
-  v1.3-20170612
-  fixed to support Raspbian-2017-03-02, Raspbian-2017-04-10
-Update:
-  v1.2-20170302
-  Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02
-Update:
-  v1.1-20160815
+* v2.1-20191106
+  - Update to support MHS35B
+* v2.0-20190704
+  - Update to support rotate the display direction
+* v1.9-20181204
+  - Update to support MHS40 & MHS32
+* v1.8-20180907
+  - Update to support MHS35
+* v1.7-20180320
+  - Update to support Raspbian Version: March 2018(Release date:2018-03-13)
+* v1.6-20170824
+  - Update xserver to support Raspbian-2017-08-16
+* v1.5-20170706
+  - Update to support Raspbian-2017-07-05, Raspbian-2017-06-21
+* v1.3-20170612
+  * fixed to support Raspbian-2017-03-02, Raspbian-2017-04-10
+* v1.2-20170302
+  * Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02
+* v1.1-20160815
