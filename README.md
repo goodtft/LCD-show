@@ -16,7 +16,7 @@ Links for Ubuntu, Kali and Retropie Linux are available at the following locatio
 2. Use `SDFormatter.exe` to format your memory card
 3. Use `Win32DiskImager.exe` to burn image to memory card
      
-## Step 2, Clone this repo onto your rpi
+## Step 2, Clone LCD-show repo onto your RPi
 
 1. Use SSH to connect the Raspberry Pi
 2. Ensure that the Raspberry Pi is connected to the Internet before executing the following commands:
@@ -28,7 +28,7 @@ chmod -R 755 LCD-show
 cd LCD-show/
 ```
 
-## Step 3, Execute the corresponding driver for your device:
+## Step 3, Execute the corresponding driver for your device
 
 ## 2.4 inch RPi Display (MPI2401):
 #### Driver install:
