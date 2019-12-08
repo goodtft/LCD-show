@@ -91,7 +91,7 @@ EN:http://www.lcdwiki.com/MHS-3.5inch_RPi_Display
 * `sudo ./MHS35B-show`
 #### WIKI:
 * CN: http://www.lcdwiki.com/zh/MHS-3.5inch_RPi_Display-B
-EN:http://www.lcdwiki.com/MHS-3.5inch_RPi_Display-B
+* EN:http://www.lcdwiki.com/MHS-3.5inch_RPi_Display-B
 
 ## 4.0 inch HDMI Display (MPI4008):
 #### Driver install:
