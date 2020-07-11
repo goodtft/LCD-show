@@ -17,7 +17,6 @@ sudo echo "display_rotate=0" >> ./boot/config.txt.bak
 sudo echo "max_usb_current=1" >> ./boot/config.txt.bak
 sudo echo "config_hdmi_boost=7" >> ./boot/config.txt.bak
 sudo echo "hdmi_group=2" >> ./boot/config.txt.bak
-sudo echo "hdmi_mode=1" >> ./boot/config.txt.bak
 sudo echo "hdmi_mode=87" >> ./boot/config.txt.bak
 sudo echo "hdmi_drive=2" >> ./boot/config.txt.bak
 sudo echo "hdmi_cvt 1024 600 60 6 0 0 0" >> ./boot/config.txt.bak
