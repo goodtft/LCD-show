@@ -56,7 +56,7 @@ Update: <br>
 Use SSH to connect the Raspberry Pi, <br>
 And Ensure that the Raspberry Pi is connected to the Internet before executing the following commands:
 -----------------------------------------------------------------------------------------------------
-
+```sudo apt install xserver-xorg-input-evdev -y```<br>
 ```sudo rm -rf LCD-show```<br>
 ```git clone https://github.com/goodtft/LCD-show.git```<br>
 ```chmod -R 755 LCD-show```<br>
