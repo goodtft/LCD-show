@@ -50,6 +50,14 @@ sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo
 sudo cp -rf /etc/rc.local ./.system_backup/
 sudo cp -rf ./etc/rc.local-original /etc/rc.local
 
+sudo cp -rf /etc/modules ./.system_backup/
+sudo cp -rf ./etc/modules-original /etc/modules
+
+if [ -f /etc/modprobe.d/fbtft.conf ]; then
+sudo cp -rf /etc/modprobe.d/fbtft.conf ./.system_backup
+sudo rm -rf /etc/modprobe.d/fbtft.conf
+fi
+
 if [ -f /etc/inittab ]; then
 sudo cp -rf /etc/inittab ./.system_backup
 sudo rm -rf /etc/inittab

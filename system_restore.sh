@@ -33,12 +33,20 @@ fi
 sudo cp -rf ./.system_backup/cmdline.txt /boot/
 sudo cp -rf ./.system_backup/config.txt /boot/
 sudo cp -rf ./.system_backup/rc.local /etc/
+sudo cp -rf ./.system_backup/modules /etc/
 
 if [ -f /etc/inittab ]; then
 sudo rm -rf /etc/inittab
 fi
 if [ -f ./.system_backup/inittab ]; then
 sudo cp -rf ./.system_backup/inittab  /etc
+fi
+
+if [ -f /etc/modprobe.d/fbtft.conf ]; then
+sudo rm -rf /etc/modprobe.d/fbtft.conf
+fi
+if [ -f ./.system_backup/fbtft.conf ]; then
+sudo cp -rf ./.system_backup/fbtft.conf  /etc/modprobe.d
 fi
 
 type fbcp > /dev/null 2>&1
