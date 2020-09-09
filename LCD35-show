@@ -8,14 +8,8 @@ fi
 if [ ! -d /etc/X11/xorg.conf.d ]; then
 sudo mkdir -p /etc/X11/xorg.conf.d
 fi
-kernel_version=`uname -r | tr -d '\n'`
-if [[ "$kernel_version" < "5.4.51-v7l+" ]];then
 sudo cp ./usr/tft35a-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft35a-overlay.dtb /boot/overlays/tft35a.dtbo
-else
-sudo cp ./usr/tft35a-overlay-5.4.dtb /boot/overlays/tft35a-overlay.dtb
-sudo cp ./usr/tft35a-overlay-5.4.dtb /boot/overlays/tft35a.dtbo
-fi
 root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
 if test "$root_dev" = "/dev/mmcblk0p7";then
 sudo cp -rf ./boot/config-noobs-nomal.txt ./boot/config.txt.bak
