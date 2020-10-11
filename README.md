@@ -57,6 +57,14 @@ Use SSH to connect the Raspberry Pi, <br>
 And Ensure that the Raspberry Pi is connected to the Internet before executing the following commands:
 -----------------------------------------------------------------------------------------------------
 
+On Updates via git Repo unistall xserver-xorg-input-evdev first! <br>
+
+################## <br>
+# Upgrade Path   # <br>
+################## <br>
+
+```sudo purge xserver-xorg-input-evdev -y```<br>
+
 ```sudo apt install xserver-xorg-input-evdev -y```<br>
 ```sudo rm -rf LCD-show```<br>
 ```git clone https://github.com/goodtft/LCD-show.git```<br>
