@@ -57,7 +57,7 @@ Use SSH to connect the Raspberry Pi, <br>
 And Ensure that the Raspberry Pi is connected to the Internet before executing the following commands:
 -----------------------------------------------------------------------------------------------------
 
-On Updates via git Repo unistall xserver-xorg-input-evdev first! <br>
+On Updates via git Repo uninstall xserver-xorg-input-evdev first! <br>
 
 
 ```sudo purge xserver-xorg-input-evdev -y```<br>
