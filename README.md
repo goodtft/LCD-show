@@ -59,11 +59,10 @@ And Ensure that the Raspberry Pi is connected to the Internet before executing t
 
 On Updates via git Repo unistall xserver-xorg-input-evdev first! <br>
 
-################## <br>
-# Upgrade Path   # <br>
-################## <br>
 
 ```sudo purge xserver-xorg-input-evdev -y```<br>
+
+Install:
 
 ```sudo apt install xserver-xorg-input-evdev -y```<br>
 ```sudo rm -rf LCD-show```<br>
