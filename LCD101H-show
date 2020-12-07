@@ -19,7 +19,7 @@ sudo echo "config_hdmi_boost=7" >> ./boot/config.txt.bak
 sudo echo "hdmi_group=2" >> ./boot/config.txt.bak
 sudo echo "hdmi_mode=87" >> ./boot/config.txt.bak
 sudo echo "hdmi_drive=2" >> ./boot/config.txt.bak
-sudo echo "hdmi_timings=1024 1 150 18 150 600 1 15 3 15 0 0 0 60 0 60000000 3" >> ./boot/config.txt.bak
+sudo echo "hdmi_timings=1024 1 200 18 200 600 1 50 3 50 0 0 0 60 0 51200000 3" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 #sudo cp -rf ./boot/config-7C-1024x600.txt /boot/config.txt
 if test "$root_dev" = "/dev/mmcblk0p7";then
