@@ -1,0 +1,23 @@
+#!/bin/bash
+
+sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
+
+sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
+sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
+sudo echo "hdmi_group=2" >> ./boot/config.txt.bak
+sudo echo "hdmi_mode=87" >> ./boot/config.txt.bak
+sudo echo "hdmi_cvt 800 480 60 6 0 0 0" >> ./boot/config.txt.bak
+sudo echo "dtoverlay=goodix" >> ./boot/config.txt.bak
+sudo cp -rf ./boot/config.txt.bak /boot/config.txt
+
+if [ -f /boot/overlays/goodix.dtbo ]; then
+sudo mv /boot/overlays/goodix.dtbo /boot/overlays/goodix.dtbo.bak
+sudo cp ./usr/goodix.dtbo /boot/overlays/ 
+fi
+
+sudo sync
+sudo sync
+sleep 1
+
+echo "reboot now"
+sudo reboot
