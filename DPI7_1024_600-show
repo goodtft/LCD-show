@@ -1,0 +1,35 @@
+#!/bin/bash
+
+sudo ./system_backup.sh
+
+sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
+
+sudo echo "dtoverlay=qddpi18" >> ./boot/config.txt.bak
+sudo echo "enable_dpi_lcd=1" >> ./boot/config.txt.bak
+sudo echo "display_default_lcd=1" >> ./boot/config.txt.bak
+sudo echo "dpi_group=2" >> ./boot/config.txt.bak
+sudo echo "dpi_mode=87" >> ./boot/config.txt.bak
+sudo echo "dpi_output_format=0x6f016" >> ./boot/config.txt.bak
+sudo echo "dpi_timings=1024 0 160 20 140 600 0 12 3 20 0 0 0 60 0 45000000 3" >> ./boot/config.txt.bak
+sudo echo "disable_overscan=1" >> ./boot/config.txt.bak
+sudo echo "dtoverlay=i2c5,pins_10_11" >> ./boot/config.txt.bak
+sudo echo "dtoverlay=goodix_dpi,interrupt=26,reset=18" >> ./boot/config.txt.bak
+sudo echo "gpio=19=op,dh" >> ./boot/config.txt.bak
+sudo cp -rf ./boot/config.txt.bak /boot/config.txt
+
+sudo cp ./usr/qddpi18.dtb /boot/overlays/qddpi18.dtbo
+sudo cp ./usr/goodix_dpi.dtb /boot/overlays/goodix_dpi.dtbo
+
+sudo touch ./.have_installed
+#echo "hdmi:capacity:7C-1024x600:0:1024:600" > ./.have_installed
+sudo sync
+sudo sync
+sleep 1
+if [ $# -eq 1 ]; then
+sudo ./rotate.sh $1
+elif [ $# -gt 1 ]; then
+echo "Too many parameters"
+fi
+
+echo "reboot now"
+sudo reboot
