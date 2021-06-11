@@ -44,8 +44,6 @@ echo "gpio:resistance:mhs35:90:480:320" > ./.have_installed
 #FBCP install
 wget --spider -q -o /dev/null --tries=1 -T 10 https://github.com
 if [ $? -eq 0 ]; then
-sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
-sudo cp -rf ./etc/rc.local /etc/rc.local
 sudo apt-get install git cmake -y 2> error_output.txt
 result=`cat ./error_output.txt`
 echo -e "\033[31m$result\033[0m"
@@ -58,6 +56,11 @@ sudo cmake ..
 sudo make
 sudo install fbcp /usr/local/bin/fbcp
 cd - > /dev/null
+type fbcp > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+sudo cp -rf ./etc/rc.local /etc/rc.local
+fi
 fi
 #evdev install
 #nodeplatform=`uname -n`
