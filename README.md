@@ -183,7 +183,7 @@ This method only applies to the Raspberry Pi series of display screens, other di
 ### Method 1, If the driver is not installed, execute the following command (Raspberry Pi needs to connected to the Internet):
 
 sudo rm -rf LCD-show<br>
-git clone https://github.com/goodtft/LCD-show.git<br>
+git clone https://github.com/nerdseverino/LCD-show.git<br>
 chmod -R 755 LCD-show<br>
 cd LCD-show/<br>
 sudo ./XXX-show 90<br>
