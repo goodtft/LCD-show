@@ -14,7 +14,7 @@ sudo echo "dpi_timings=800 0 210 1 46 480 0 22 1 23 0 0 0 60 0 33000000 6" >> ./
 sudo echo "disable_overscan=1" >> ./boot/config.txt.bak
 sudo echo "dtoverlay=i2c5,pins_10_11" >> ./boot/config.txt.bak
 sudo echo "dtoverlay=goodix_dpi,interrupt=26,reset=18" >> ./boot/config.txt.bak
-sudo echo "gpio=19=op,dh" >> ./boot/config.txt.bak
+#sudo echo "gpio=19=op,dh" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
 sudo cp ./usr/qddpi18.dtb /boot/overlays/qddpi18.dtbo
