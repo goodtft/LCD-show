@@ -89,7 +89,9 @@ EN: http://www.lcdwiki.com/2.8inch_RPi_Display
   
 # 3.2” RPi Display (MPI3201):
 ### Driver install:
-sudo ./LCD32-show   
+sudo ./LCD32-show
+### For RPi Model B Rev1:
+sudo ./LCD32-B-Rev1-show
 ### WIKI:
 CN: http://www.lcdwiki.com/zh/3.2inch_RPi_Display  <br>
 EN: http://www.lcdwiki.com/3.2inch_RPi_Display
