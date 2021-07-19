@@ -24,11 +24,11 @@ sudo echo "dtoverlay=tft9341:rotate=90" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 sudo cp -rf ./usr/99-calibration.conf-32-90  /etc/X11/xorg.conf.d/99-calibration.conf
 sudo cp -rf ./usr/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
-if test "$root_dev" = "/dev/mmcblk0p7";then
-sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
-else
-sudo cp ./usr/cmdline.txt /boot/
-fi
+#if test "$root_dev" = "/dev/mmcblk0p7";then
+#sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
+#else
+#sudo cp ./usr/cmdline.txt /boot/
+#fi
 sudo cp ./usr/inittab /etc/
 #sudo cp ./boot/config-32.txt /boot/config.txt
 sudo touch ./.have_installed
