@@ -30,6 +30,11 @@ sudo echo "hdmi_cvt 480 320 60 6 0 0 0" >> ./boot/config.txt.bak
 sudo echo "hdmi_drive=2" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
+if [ -f /boot/overlays/goodix.dtbo ]; then
+sudo mv /boot/overlays/goodix.dtbo /boot/overlays/goodix.dtbo.bak
+sudo cp ./usr/goodix.dtbo /boot/overlays/ 
+fi
+
 sudo cp -rf ./usr/99-calibration.conf-mhs35b-90  /etc/X11/xorg.conf.d/99-calibration.conf
 sudo cp -rf ./usr/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
 #if test "$root_dev" = "/dev/mmcblk0p7";then
