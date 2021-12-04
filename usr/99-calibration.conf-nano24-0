@@ -1,0 +1,9 @@
+Section "InputClass"
+        Identifier      "calibration"
+        MatchProduct    "Goodix Capacitive TouchScreen"
+        Option  "Calibration"   "240 0 320 0"
+        Option  "SwapAxes"      "0"
+        Option "EmulateThirdButton" "1"
+        Option "EmulateThirdButtonTimeout" "1000"
+        Option "EmulateThirdButtonMoveThreshold" "300"
+EndSection
