@@ -22,6 +22,7 @@ sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
 sudo echo "enable_uart=1" >> ./boot/config.txt.bak
 sudo echo "dtoverlay=tft7789:rotate=270" >> ./boot/config.txt.bak
 sudo echo "dtoverlay=ft6236" >> ./boot/config.txt.bak
+sudo echo "gpio=18=op,dh" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
 sudo cp ./usr/ft6236.dtb /boot/overlays/ft6236.dtbo
