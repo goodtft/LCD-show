@@ -1,7 +1,7 @@
 Section "InputClass"
         Identifier      "calibration"
         MatchProduct    "generic ft5x06 (11)"
-        Option  "Calibration"   "319 0 0 239"
+        Option  "Calibration"   "0 239 319 0"
         Option  "SwapAxes"      "1"
         Option "EmulateThirdButton" "1"
         Option "EmulateThirdButtonTimeout" "1000"
