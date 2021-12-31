@@ -42,14 +42,27 @@ sudo touch ./.have_installed
 echo "gpio:resistance:mis35:90:480:320" > ./.have_installed
 
 #FBCP install
-wget --spider -q -o /dev/null --tries=1 -T 10 https://github.com
+wget --spider -q -o /dev/null --tries=1 -T 10 https://cmake.org/
 if [ $? -eq 0 ]; then
-sudo apt-get install git cmake -y 2> error_output.txt
+sudo apt-get update
+sudo apt-get install cmake -y 2> error_output.txt
 result=`cat ./error_output.txt`
 echo -e "\033[31m$result\033[0m"
-grep -q "^E:" ./error_output.txt && exit
+grep -q "^E:" ./error_output.txt
+type cmake > /dev/null 2>&1
+if [ $? -eq 0 ]; then
 sudo rm -rf rpi-fbcp
+wget --spider -q -o /dev/null --tries=1 -T 10 https://github.com
+if [ $? -eq 0 ]; then
 sudo git clone https://github.com/tasanakorn/rpi-fbcp
+if [ $? -ne 0 ]; then
+echo "download fbcp failed, copy native fbcp!!!"
+sudo cp -r ./usr/rpi-fbcp .
+fi
+else
+echo "bad network, copy native fbcp!!!"
+sudo cp -r ./usr/rpi-fbcp .
+fi
 sudo mkdir ./rpi-fbcp/build
 cd ./rpi-fbcp/build/
 sudo cmake ..
@@ -61,7 +74,13 @@ if [ $? -eq 0 ]; then
 sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
 sudo cp -rf ./etc/rc.local /etc/rc.local
 fi
+else
+echo "install cmake error!!!!"
 fi
+else
+echo "bad network, can't install cmake!!!"
+fi
+
 #evdev install
 #nodeplatform=`uname -n`
 #kernel=`uname -r`
@@ -75,8 +94,12 @@ if test $version -lt 2017;then
 echo "reboot"
 else
 echo "need to update touch configuration"
+wget --spider -q -o /dev/null --tries=1 -T 10 http://mirrors.zju.edu.cn/raspbian/raspbian
+if [ $? -eq 0 ]; then
+sudo apt-get install xserver-xorg-input-evdev 2> error_output.txt
+else
 sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb 2> error_output.txt
-#sudo apt-get install xserver-xorg-input-evdev  2> error_output.txt
+fi
 result=`cat ./error_output.txt`
 echo -e "\033[31m$result\033[0m"
 grep -q "error:" ./error_output.txt && exit
