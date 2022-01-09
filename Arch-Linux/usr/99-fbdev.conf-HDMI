@@ -4,13 +4,13 @@
 #
 # When troubleshooting, check /var/log/Xorg.0.log for the debugging
 # output and error messages.
-# Run "man fbdev" to get additional information about the extra
+# Run "man fbturbo" to get additional information about the extra
 # configuration options for tuning the driver.
 
 Section "Device"
         Identifier      "Allwinner A10/A13/A20 FBDEV"
         Driver          "fbdev"
-        Option          "fbdev" "/dev/fb1"
+        Option          "fbdev" "/dev/fb0"
 
         Option          "SwapbuffersWait" "true"
 EndSection
