@@ -1,9 +1,9 @@
 #!/bin/bash
 
-sudo ./system_backup.sh
-
 # Change working directory up to the main directory to allow easier access to the boot, etc, and usr directories.
 cd ..
+
+sudo ./system_backup.sh
 
 if [ -f /etc/X11/xorg.conf.d/40-libinput.conf ]; then
     sudo rm -rf /etc/X11/xorg.conf.d/40-libinput.conf
@@ -72,7 +72,7 @@ if [ $? -eq 0 ]; then
         cd - > /dev/null
         type fbcp > /dev/null 2>&1
         if [ $? -eq 0 ]; then
-            sudo cp -rf ./Arch-Linux/usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+            sudo cp -rf ./Arch-Linux/usr/99-fbdev-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbdev.conf
             sudo cp -rf ./etc/rc.local /etc/rc.local
         fi
     else
