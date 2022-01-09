@@ -1,6 +1,15 @@
 #!/bin/bash
 if [ ! -d "./.system_backup" ]; then
 sudo mkdir ./.system_backup
+else
+    echo "It looks like a backup of your previous configuration already exists. Would you like to delete that backup and create a new one of the current configuration? [Y]es or [N]o."
+    read override_choice
+    if [ "${override_choice^^}" = "N" ]; then
+        echo "Not overwriting existing backup and cancelling backup process!"
+        exit
+    else
+        echo "Overwriting existing backup to create a new one now."
+    fi
 fi
 
 sudo rm -rf ./.system_backup/*
