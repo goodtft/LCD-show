@@ -97,7 +97,7 @@ else
     echo "need to update touch configuration"
     wget --spider -q -o /dev/null --tries=1 -T 10 http://mirrors.zju.edu.cn/raspbian/raspbian
     if [ $? -eq 0 ]; then
-        sudo pacman -S xf86-input-evdev
+        sudo pacman -S --noconfirm --needed xf86-input-evdev
     else
         echo "Evdev input driver could not be installed. Terminating and restoring."
         ./system_restore.sh

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Change directory to get easy access to scripts from the main directory
+cd ..
 
 #dev=`grep -rn "Option" /usr/share/X11/xorg.conf.d/99-fbturbo.conf | grep "fbdev" |awk -F\" '{printf $4}'`
 #if test "$dev" = "/dev/fb0";then
