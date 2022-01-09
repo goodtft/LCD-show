@@ -17,6 +17,7 @@ fi
 
 if [ -d /etc/X11/xorg.conf.d ]; then
 sudo mkdir -p ./.system_backup/xorg.conf.d
+sudo cp -r /etc/X11/xorg.conf.d/* ./.system_backup/xorg.conf.d
 sudo rm -rf /etc/X11/xorg.conf.d
 fi
 
@@ -46,12 +47,12 @@ fi
 if [ -f /usr/share/X11/xorg.conf.d/99-fbturbo.conf ]; then
 sudo cp -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf ./.system_backup/
 fi
-sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+#sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo.conf
 sudo cp -rf /etc/rc.local ./.system_backup/
-sudo cp -rf ./etc/rc.local-original /etc/rc.local
+#sudo cp -rf ./etc/rc.local-original /etc/rc.local
 
 sudo cp -rf /etc/modules ./.system_backup/
-sudo cp -rf ./etc/modules-original /etc/modules
+#sudo cp -rf ./etc/modules-original /etc/modules
 
 if [ -f /etc/modprobe.d/fbtft.conf ]; then
 sudo cp -rf /etc/modprobe.d/fbtft.conf ./.system_backup
@@ -79,7 +80,7 @@ fi
 
 if [ -f /usr/share/X11/xorg.conf.d/10-evdev.conf ]; then
 sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf ./.system_backup
-sudo dpkg -P xserver-xorg-input-evdev
+#sudo dpkg -P xserver-xorg-input-evdev
 #sudo apt-get purge xserver-xorg-input-evdev -y  2> error_output.txt
 #result=`cat ./error_output.txt`
 #echo -e "\033[31m$result\033[0m"

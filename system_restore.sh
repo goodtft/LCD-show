@@ -69,18 +69,18 @@ fi
 #echo -e "\033[31m$result\033[0m"
 #fi
 
-if [ -f /usr/share/X11/xorg.conf.d/10-evdev.conf ]; then
-sudo dpkg -P xserver-xorg-input-evdev
-#sudo apt-get purge xserver-xorg-input-evdev -y 2> error_output.txt
-#result=`cat ./error_output.txt`
-#echo -e "\033[31m$result\033[0m"
-fi
-if [ -f ./.system_backup/10-evdev.conf ]; then
-sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb
-#sudo apt-get install xserver-xorg-input-evdev -y 2> error_output.txt
-#result=`cat ./error_output.txt`
-#echo -e "\033[31m$result\033[0m"
-fi
+# if [ -f /usr/share/X11/xorg.conf.d/10-evdev.conf ]; then
+# sudo dpkg -P xserver-xorg-input-evdev
+# #sudo apt-get purge xserver-xorg-input-evdev -y 2> error_output.txt
+# #result=`cat ./error_output.txt`
+# #echo -e "\033[31m$result\033[0m"
+# fi
+# if [ -f ./.system_backup/10-evdev.conf ]; then
+# sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb
+# #sudo apt-get install xserver-xorg-input-evdev -y 2> error_output.txt
+# #result=`cat ./error_output.txt`
+# #echo -e "\033[31m$result\033[0m"
+# fi
 
 if [ -f /usr/share/X11/xorg.conf.d/45-evdev.conf ]; then
 sudo rm -rf /usr/share/X11/xorg.conf.d/45-evdev.conf
