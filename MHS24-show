@@ -35,7 +35,7 @@ if test $version -lt 970;then
 echo "reboot"
 else
 echo "need to update touch configuration"
-sudo apt-get install xserver-xorg-input-evdev
+sudo apt-get install xserver-xorg-input-evdev -y
 sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
 echo "reboot"
 fi

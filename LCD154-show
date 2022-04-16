@@ -123,7 +123,7 @@ fi
 #else
 #echo "need to update touch configuration"
 #sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb 2> error_output.txt
-#sudo apt-get install xserver-xorg-input-evdev  2> error_output.txt
+#sudo apt-get install xserver-xorg-input-evdev -y  2> error_output.txt
 #result=`cat ./error_output.txt`
 #echo -e "\033[31m$result\033[0m"
 #grep -q "error:" ./error_output.txt && exit
