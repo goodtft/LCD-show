@@ -50,11 +50,15 @@ if [ -f /usr/share/X11/xorg.conf.d/99-fbturbo.conf ]; then
 sudo cp -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf ./.system_backup/
 fi
 #sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+if [ -f /etc/rc.local ]; then
 sudo cp -rf /etc/rc.local ./.system_backup/
 #sudo cp -rf ./etc/rc.local-original /etc/rc.local
+fi
 
+if [ -f /etc/modules ]; then
 sudo cp -rf /etc/modules ./.system_backup/
 #sudo cp -rf ./etc/modules-original /etc/modules
+fi
 
 if [ -f /etc/modprobe.d/fbtft.conf ]; then
 sudo cp -rf /etc/modprobe.d/fbtft.conf ./.system_backup

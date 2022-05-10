@@ -3,6 +3,9 @@
 # Change working directory up to the main directory to allow easier access to the boot, etc, and usr directories.
 cd ..
 
+# Install wget...
+sudo pacman -Sy --needed --noconfirm wget
+
 sudo ./system_backup.sh
 
 if [ -f /etc/X11/xorg.conf.d/40-libinput.conf ]; then
@@ -46,7 +49,7 @@ echo "gpio:resistance:35:90:480:320" > ./.have_installed
 #FBCP install
 wget --spider -q -o /dev/null --tries=1 -T 10 https://cmake.org/
 if [ $? -eq 0 ]; then
-    sudo pacman -Sy --needed --noconfirm cmake 2> error_output.txt
+    sudo pacman -Sy --needed --noconfirm cmake make 2> error_output.txt
     result=`cat ./error_output.txt`
     echo -e "\033[31m$result\033[0m"
     grep -q "^E:" ./error_output.txt
@@ -66,14 +69,14 @@ if [ $? -eq 0 ]; then
         fi
         sudo mkdir ./rpi-fbcp/build
         cd ./rpi-fbcp/build/
-        sudo cmake ..
-        sudo make
+        cmake ..
+        make
         sudo install fbcp /usr/local/bin/fbcp
         cd - > /dev/null
         type fbcp > /dev/null 2>&1
         if [ $? -eq 0 ]; then
             sudo cp -rf ./Arch-Linux/usr/99-fbdev-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbdev.conf
-            sudo cp -rf ./etc/rc.local /etc/rc.local
+            #sudo cp -rf ./etc/rc.local /etc/rc.local
         fi
     else
         echo "install cmake error!!!!"

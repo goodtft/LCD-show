@@ -1,6 +1,6 @@
 #!/bin/bash
 cur_dir=`pwd`
-if [ ! -f $cur_dir/.have_installed ]; then
+if [ ! -f $cur_dir/../.have_installed ]; then
 echo "Please install the LCD driver first"
 echo "Usage: sudo ./xxx-show. xxx: MHS35,LCD35,MPI3508 etc."
 exit
@@ -39,13 +39,13 @@ exit
 fi
 
 #get screen parameter
-tmp=`cat $cur_dir/.have_installed`
-output_type=`cat $cur_dir/.have_installed | awk -F ':' '{printf $1}'`
-touch_type=`cat $cur_dir/.have_installed | awk -F ':' '{printf $2}'`
-device_id=`cat $cur_dir/.have_installed | awk -F ':' '{printf $3}'`
-default_value=`cat $cur_dir/.have_installed | awk -F ':' '{printf $4}'`
-width=`cat $cur_dir/.have_installed | awk -F ':' '{printf $5}'`
-height=`cat $cur_dir/.have_installed | awk -F ':' '{printf $6}'`
+tmp=`cat $cur_dir/../.have_installed`
+output_type=`cat $cur_dir/../.have_installed | awk -F ':' '{printf $1}'`
+touch_type=`cat $cur_dir/../.have_installed | awk -F ':' '{printf $2}'`
+device_id=`cat $cur_dir/../.have_installed | awk -F ':' '{printf $3}'`
+default_value=`cat $cur_dir/../.have_installed | awk -F ':' '{printf $4}'`
+width=`cat $cur_dir/../.have_installed | awk -F ':' '{printf $5}'`
+height=`cat $cur_dir/../.have_installed | awk -F ':' '{printf $6}'`
 
 if [ $output_type = "hdmi" ]; then
 result=`grep -rn "^display_rotate=" /boot/config.txt | tail -n 1`
