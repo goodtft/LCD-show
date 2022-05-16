@@ -39,8 +39,14 @@ sudo cp -rf ./.system_backup/99-fbturbo.conf /usr/share/X11/xorg.conf.d
 fi
 sudo cp -rf ./.system_backup/cmdline.txt /boot/
 sudo cp -rf ./.system_backup/config.txt /boot/
+
+if [ -f ./.system_backup/rc.local ]; then
 sudo cp -rf ./.system_backup/rc.local /etc/
+fi
+
+if [ -f ./.system_backup/modules ]; then
 sudo cp -rf ./.system_backup/modules /etc/
+fi
 
 if [ -f /etc/inittab ]; then
 sudo rm -rf /etc/inittab
