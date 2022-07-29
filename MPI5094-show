@@ -1,7 +1,8 @@
 #!/bin/bash
 
-sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
-
+#sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
+source ./system_config.sh
+sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
 sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
 sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
 sudo echo "hdmi_group=2" >> ./boot/config.txt.bak
