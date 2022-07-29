@@ -6,7 +6,8 @@
 #exit
 #fi
 sudo ./system_backup.sh
-sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
+source ./system_config.sh
+#sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
 sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
