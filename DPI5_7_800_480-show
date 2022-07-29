@@ -2,8 +2,8 @@
 
 sudo ./system_backup.sh
 
-sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
-
+#sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
+source ./system_config.sh
 sudo echo "dtoverlay=qddpi18" >> ./boot/config.txt.bak
 sudo echo "enable_dpi_lcd=1" >> ./boot/config.txt.bak
 sudo echo "display_default_lcd=1" >> ./boot/config.txt.bak
