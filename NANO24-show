@@ -10,13 +10,16 @@ sudo mkdir -p /etc/X11/xorg.conf.d
 fi
 sudo cp ./usr/tft7789-overlay.dtb /boot/overlays/
 sudo cp ./usr/tft7789-overlay.dtb /boot/overlays/tft7789.dtbo
-root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
-if test "$root_dev" = "/dev/mmcblk0p7";then
-sudo cp -rf ./boot/config-noobs-nomal.txt ./boot/config.txt.bak
-else
-sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
+#root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
+#if test "$root_dev" = "/dev/mmcblk0p7";then
+#sudo cp -rf ./boot/config-noobs-nomal.txt ./boot/config.txt.bak
+#else
+#sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
+#sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
+#fi
+
+source ./system_config.sh
 sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
-fi
 sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
 sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
 sudo echo "enable_uart=1" >> ./boot/config.txt.bak
@@ -44,6 +47,7 @@ sudo cp ./usr/inittab /etc/
 sudo touch ./.have_installed
 echo "gpio:resistance:nano24:90:320:240" > ./.have_installed
 
+sudo apt-get update
 #FBCP install
 wget --spider -q -o /dev/null --tries=1 -T 10 https://cmake.org/
 if [ $? -eq 0 ]; then
@@ -89,6 +93,7 @@ fi
 version=`uname -v`
 #if test "$nodeplatform" = "raspberrypi";then
 #echo "this is raspberrypi kernel"
+input_result=0
 version=${version##* }
 #version=${version#*#}
 echo $version
@@ -97,10 +102,21 @@ echo "reboot"
 else
 echo "need to update touch configuration"
 wget --spider -q -o /dev/null --tries=1 -T 10 http://mirrors.zju.edu.cn/raspbian/raspbian
-if [ $? -eq 0 ]; then
-sudo apt-get install xserver-xorg-input-evdev 2> error_output.txt
+if [ $? -ne 0 ]; then
+input_result=1
 else
+sudo apt-get install xserver-xorg-input-evdev  2> error_output.txt
+dpkg -l | grep xserver-xorg-input-evdev > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+input_result=1
+fi
+fi
+if [ $input_result -eq 1 ]; then 
+if [ $hardware_arch -eq 32 ]; then
 sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb 2> error_output.txt
+elif [ $hardware_arch -eq 64 ]; then
+sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.6-2_arm64.deb 2> error_output.txt
+fi
 fi
 result=`cat ./error_output.txt`
 echo -e "\033[31m$result\033[0m"
