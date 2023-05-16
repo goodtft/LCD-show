@@ -1,0 +1,50 @@
+#!/bin/bash
+
+sudo ./system_backup.sh
+
+#root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
+#if test "$root_dev" = "/dev/mmcblk0p7";then
+#sudo cp -rf ./boot/config-noobs-nomal.txt ./boot/config.txt.bak
+#else
+#sudo cp -rf ./boot/config-nomal.txt ./boot/config.txt.bak
+#sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
+#fi
+
+source ./system_config.sh
+sudo sed -i -e 's/#dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-fkms-v3d/' ./boot/config.txt.bak
+sudo sed -i -e 's/#dtoverlay=vc4-kms-v3d/dtoverlay=vc4-fkms-v3d/' ./boot/config.txt.bak
+sudo echo "max_usb_current=1" >> ./boot/config.txt.bak
+sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
+sudo echo "config_hdmi_boost=7" >> ./boot/config.txt.bak
+sudo echo "hdmi_group=2" >> ./boot/config.txt.bak
+sudo echo "hdmi_mode=1" >> ./boot/config.txt.bak
+sudo echo "hdmi_mode=87" >> ./boot/config.txt.bak
+sudo echo "hdmi_drive=2" >> ./boot/config.txt.bak
+sudo echo "hdmi_cvt 1280 800 60 6 0 0 0" >> ./boot/config.txt.bak
+sudo cp -rf ./boot/config.txt.bak /boot/config.txt
+#sudo cp -rf ./boot/config-7C-1024x600.txt /boot/config.txt
+#if test "$root_dev" = "/dev/mmcblk0p7";then
+#sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
+#else
+#sudo cp ./usr/cmdline.txt /boot/
+#fi
+sudo cp ./usr/inittab /etc/
+sudo cp -rf ./usr/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+
+if [ ! -d /etc/X11/xorg.conf.d ]; then
+sudo mkdir /etc/X11/xorg.conf.d
+fi
+sudo cp ./usr/40-libinput.conf-0 /etc/X11/xorg.conf.d/40-libinput.conf
+sudo touch ./.have_installed
+echo "hdmi:capacity:101H-1280x800:0:1280:800" > ./.have_installed
+sudo sync
+sudo sync
+sleep 1
+if [ $# -eq 1 ]; then
+sudo ./rotate.sh $1
+elif [ $# -gt 1 ]; then
+echo "Too many parameters"
+fi
+
+echo "reboot now"
+sudo reboot
