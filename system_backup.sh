@@ -1,6 +1,15 @@
 #!/bin/bash
 if [ ! -d "./.system_backup" ]; then
 sudo mkdir ./.system_backup
+else
+    echo "It looks like a backup of your previous configuration already exists. Would you like to delete that backup and create a new one of the current configuration? [Y]es or [N]o."
+    read override_choice
+    if [ "${override_choice^^}" = "N" ]; then
+        echo "Not overwriting existing backup and cancelling backup process!"
+        exit
+    else
+        echo "Overwriting existing backup to create a new one now."
+    fi
 fi
 
 sudo rm -rf ./.system_backup/*
@@ -17,6 +26,7 @@ fi
 
 if [ -d /etc/X11/xorg.conf.d ]; then
 sudo mkdir -p ./.system_backup/xorg.conf.d
+sudo cp -r /etc/X11/xorg.conf.d/* ./.system_backup/xorg.conf.d
 sudo rm -rf /etc/X11/xorg.conf.d
 fi
 
@@ -36,22 +46,19 @@ fi
 root_dev=`grep -oPr "root=[^\s]*" /boot/cmdline.txt | awk -F= '{printf $NF}'`
 sudo cp -rf /boot/config.txt ./.system_backup
 sudo cp -rf /boot/cmdline.txt ./.system_backup/
-if test "$root_dev" = "/dev/mmcblk0p7";then
-sudo cp -rf ./boot/config-noobs-nomal.txt /boot/config.txt
-#sudo cp -rf ./usr/cmdline.txt-noobs-original /boot/cmdline.txt
-else
-sudo cp -rf ./boot/config-nomal.txt /boot/config.txt
-#sudo cp -rf ./usr/cmdline.txt-original /boot/cmdline.txt
-fi
 if [ -f /usr/share/X11/xorg.conf.d/99-fbturbo.conf ]; then
 sudo cp -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf ./.system_backup/
 fi
-sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+#sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+if [ -f /etc/rc.local ]; then
 sudo cp -rf /etc/rc.local ./.system_backup/
-sudo cp -rf ./etc/rc.local-original /etc/rc.local
+#sudo cp -rf ./etc/rc.local-original /etc/rc.local
+fi
 
+if [ -f /etc/modules ]; then
 sudo cp -rf /etc/modules ./.system_backup/
-sudo cp -rf ./etc/modules-original /etc/modules
+#sudo cp -rf ./etc/modules-original /etc/modules
+fi
 
 if [ -f /etc/modprobe.d/fbtft.conf ]; then
 sudo cp -rf /etc/modprobe.d/fbtft.conf ./.system_backup
@@ -79,7 +86,7 @@ fi
 
 if [ -f /usr/share/X11/xorg.conf.d/10-evdev.conf ]; then
 sudo cp -rf /usr/share/X11/xorg.conf.d/10-evdev.conf ./.system_backup
-sudo dpkg -P xserver-xorg-input-evdev
+#sudo dpkg -P xserver-xorg-input-evdev
 #sudo apt-get purge xserver-xorg-input-evdev -y  2> error_output.txt
 #result=`cat ./error_output.txt`
 #echo -e "\033[31m$result\033[0m"

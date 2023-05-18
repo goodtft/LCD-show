@@ -27,13 +27,26 @@ fi
 ls -al ./.system_backup/*.dtb > /dev/null 2>&1 && sudo cp -rf ./.system_backup/*.dtb  /boot/overlays/
 ls -al ./.system_backup/*.dtbo > /dev/null 2>&1 && sudo cp -rf ./.system_backup/*.dtbo  /boot/overlays/
 
+if [ -f /usr/share/X11/xorg.conf.d/99-fbdev.conf ]; then
+    sudo rm -rf /usr/share/X11/xorg.conf.d/99-fbdev.conf
+fi
+if [ -f /usr/share/X11/xorg.conf.d/99-fbturbo.conf ]; then
+    sudo rm -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+fi
+
 if [ -f ./.system_backup/99-fbturbo.conf ];then
 sudo cp -rf ./.system_backup/99-fbturbo.conf /usr/share/X11/xorg.conf.d
 fi
 sudo cp -rf ./.system_backup/cmdline.txt /boot/
 sudo cp -rf ./.system_backup/config.txt /boot/
+
+if [ -f ./.system_backup/rc.local ]; then
 sudo cp -rf ./.system_backup/rc.local /etc/
+fi
+
+if [ -f ./.system_backup/modules ]; then
 sudo cp -rf ./.system_backup/modules /etc/
+fi
 
 if [ -f /etc/inittab ]; then
 sudo rm -rf /etc/inittab
@@ -69,18 +82,18 @@ fi
 #echo -e "\033[31m$result\033[0m"
 #fi
 
-if [ -f /usr/share/X11/xorg.conf.d/10-evdev.conf ]; then
-sudo dpkg -P xserver-xorg-input-evdev
-#sudo apt-get purge xserver-xorg-input-evdev -y 2> error_output.txt
-#result=`cat ./error_output.txt`
-#echo -e "\033[31m$result\033[0m"
-fi
-if [ -f ./.system_backup/10-evdev.conf ]; then
-sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb
-#sudo apt-get install xserver-xorg-input-evdev -y 2> error_output.txt
-#result=`cat ./error_output.txt`
-#echo -e "\033[31m$result\033[0m"
-fi
+# if [ -f /usr/share/X11/xorg.conf.d/10-evdev.conf ]; then
+# sudo dpkg -P xserver-xorg-input-evdev
+# #sudo apt-get purge xserver-xorg-input-evdev -y 2> error_output.txt
+# #result=`cat ./error_output.txt`
+# #echo -e "\033[31m$result\033[0m"
+# fi
+# if [ -f ./.system_backup/10-evdev.conf ]; then
+# sudo dpkg -i -B ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb
+# #sudo apt-get install xserver-xorg-input-evdev -y 2> error_output.txt
+# #result=`cat ./error_output.txt`
+# #echo -e "\033[31m$result\033[0m"
+# fi
 
 if [ -f /usr/share/X11/xorg.conf.d/45-evdev.conf ]; then
 sudo rm -rf /usr/share/X11/xorg.conf.d/45-evdev.conf
