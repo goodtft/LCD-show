@@ -1,4 +1,6 @@
 #!/bin/bash
+deb_ver=`cat /etc/debian_version | tr -d '\n'`
+
 if [ ! -d "./.system_backup" ]; then
 sudo mkdir ./.system_backup
 fi
@@ -46,7 +48,9 @@ fi
 if [ -f /usr/share/X11/xorg.conf.d/99-fbturbo.conf ]; then
 sudo cp -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf ./.system_backup/
 fi
+if [[ "$deb_ver" < "12.1" ]]; then
 sudo cp -rf ./usr/99-fbturbo.conf-original /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+fi
 sudo cp -rf /etc/rc.local ./.system_backup/
 sudo cp -rf ./etc/rc.local-original /etc/rc.local
 

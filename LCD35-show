@@ -19,6 +19,7 @@ sudo cp ./usr/tft35a-overlay.dtb /boot/overlays/tft35a.dtbo
 #fi
 
 source ./system_config.sh
+#sudo sed -i -e 's/dtoverlay=vc4-kms-v3d/#dtoverlay=vc4-kms-v3d/' ./boot/config.txt.bak
 sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
 sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
 sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
@@ -32,7 +33,9 @@ sudo echo "hdmi_drive=2" >> ./boot/config.txt.bak
 sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 
 sudo cp -rf ./usr/99-calibration.conf-35-90  /etc/X11/xorg.conf.d/99-calibration.conf
+if [[ "$deb_version" < "12.1" ]]; then
 sudo cp -rf ./usr/99-fbturbo.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+fi
 #if test "$root_dev" = "/dev/mmcblk0p7";then
 #sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
 #else
@@ -48,7 +51,7 @@ sudo apt-get update
 wget --spider -q -o /dev/null --tries=1 -T 10 https://cmake.org/
 if [ $? -eq 0 ]; then
 #sudo apt-get update
-sudo apt-get install cmake -y 2> error_output.txt
+sudo apt-get install cmake libraspberrypi-dev -y 2> error_output.txt
 result=`cat ./error_output.txt`
 echo -e "\033[31m$result\033[0m"
 grep -q "^E:" ./error_output.txt
@@ -74,7 +77,9 @@ sudo install fbcp /usr/local/bin/fbcp
 cd - > /dev/null
 type fbcp > /dev/null 2>&1
 if [ $? -eq 0 ]; then
+if [[ "$deb_version" < "12.1" ]]; then
 sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+fi
 sudo cp -rf ./etc/rc.local /etc/rc.local
 fi
 else
