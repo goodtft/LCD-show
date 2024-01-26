@@ -2,11 +2,18 @@
 
 big_version=`lsb_release -r | awk -F ' '  '{printf $NF}'`
 deb_version=`cat /etc/debian_version | tr -d '\n'`
+hw_result=`tr -d '\0' < /proc/device-tree/model`
 
 if [ $(getconf WORD_BIT) = '32' ] && [ $(getconf LONG_BIT) = '64' ] ; then
 hardware_arch=64
 else
 hardware_arch=32
+fi
+
+if [[ $hw_result == *"Raspberry Pi 5"* ]]; then
+hardware_model=5
+else
+hardware_model=255
 fi
 
 sudo raspi-config nonint do_wayland W1

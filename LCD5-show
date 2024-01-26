@@ -16,6 +16,9 @@ row=`grep -nr "#dtoverlay=vc4-fkms-v3d" ./boot/config.txt.bak | awk -F ':' '{if(
 sudo sed -i -e ''"$row"'s/#dtoverlay=vc4-fkms-v3d/dtoverlay=vc4-fkms-v3d/' ./boot/config.txt.bak
 sudo sed -i -e 's/#max_framebuffers=2/max_framebuffers=2/' ./boot/config.txt.bak
 fi
+if [ $hardware_model -eq 5 ]; then
+sudo sed -i -e 's/#dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d/' ./boot/config.txt.bak
+fi
 sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
 sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
 sudo echo "dtparam=spi=on" >> ./boot/config.txt.bak
