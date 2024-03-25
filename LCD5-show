@@ -10,6 +10,8 @@ sudo ./system_backup.sh
 #sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
 #fi
 
+sudo cp ./usr/ads7846-overlay.dtb /boot/overlays/ads7846.dtbo
+
 source ./system_config.sh
 if [[ "$deb_version" < "12.1" ]]; then
 row=`grep -nr "#dtoverlay=vc4-fkms-v3d" ./boot/config.txt.bak | awk -F ':' '{if(NR==1)printf $1}'`
