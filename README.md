@@ -1,6 +1,7 @@
 # Prueba con LCD en Raspberry 4B
 
-
+![Horizontal](img/IMG_0831.HEIC)
+![Vertical](img/camphoto_1903590565.JPG)
 
 ## Pedido
 
