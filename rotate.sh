@@ -95,23 +95,23 @@ fi
 #setting LCD rotate
 if [ $output_type = "hdmi" ]; then
 if [ $new_rotate_value -eq 4 ]; then
-sudo sed -i -e ''"$line"'s/'"$str"'/display_rotate=0x10000/' /boot/config.txt
+sudo sed -i --follow-symlinks -e ''"$line"'s/'"$str"'/display_rotate=0x10000/' /boot/config.txt
 elif  [ $new_rotate_value -eq 5 ]; then
-sudo sed -i -e ''"$line"'s/'"$str"'/display_rotate=0x20000/' /boot/config.txt
+sudo sed -i --follow-symlinks -e ''"$line"'s/'"$str"'/display_rotate=0x20000/' /boot/config.txt
 else
-sudo sed -i -e ''"$line"'s/'"$str"'/display_rotate='"$new_rotate_value"'/' /boot/config.txt
+sudo sed -i --follow-symlinks -e ''"$line"'s/'"$str"'/display_rotate='"$new_rotate_value"'/' /boot/config.txt
 fi
 new_rotate_value=$[$new_rotate_value*90]
 elif [ $output_type = "gpio" ]; then
-sudo sed -i -e ''"$line"'s/'"$str"'/rotate='"$new_rotate_value"'/' /boot/config.txt
+sudo sed -i --follow-symlinks -e ''"$line"'s/'"$str"'/rotate='"$new_rotate_value"'/' /boot/config.txt
 resultr=`grep -rn "^hdmi_cvt" /boot/config.txt | tail -n 1 | awk -F' ' '{print $1,$2,$3}'`
 if [ -n "$resultr" ]; then
 liner=`echo -n $resultr | awk -F: '{printf $1}'`
 strr=`echo -n $resultr | awk -F: '{printf $2}'`
 if [ $new_rotate_value -eq $default_value ] || [ $new_rotate_value -eq $[($default_value+180+360)%360] ]; then
-sudo sed -i -e ''"$liner"'s/'"$strr"'/hdmi_cvt '"$width"' '"$height"'/' /boot/config.txt
+sudo sed -i --follow-symlinks -e ''"$liner"'s/'"$strr"'/hdmi_cvt '"$width"' '"$height"'/' /boot/config.txt
 elif [ $new_rotate_value -eq $[($default_value-90+360)%360] ] || [ $new_rotate_value -eq $[($default_value+90+360)%360] ]; then
-sudo sed -i -e ''"$liner"'s/'"$strr"'/hdmi_cvt '"$height"' '"$width"'/' /boot/config.txt
+sudo sed -i --follow-symlinks -e ''"$liner"'s/'"$strr"'/hdmi_cvt '"$height"' '"$width"'/' /boot/config.txt
 fi
 fi
 fi
