@@ -1,0 +1,137 @@
+#!/bin/bash
+
+# System-Backup durchführen
+sudo ./system_backup.sh
+
+# Existierende libinput Konfiguration entfernen, falls vorhanden
+if [ -f /etc/X11/xorg.conf.d/40-libinput.conf ]; then
+    sudo rm -rf /etc/X11/xorg.conf.d/40-libinput.conf
+fi
+
+# Sicherstellen, dass das X11-Konfigurationsverzeichnis existiert
+if [ ! -d /etc/X11/xorg.conf.d ]; then
+    sudo mkdir -p /etc/X11/xorg.conf.d
+fi
+
+# Kopieren der Device Tree Binaries für das TFT-Display
+sudo cp ./usr/tft35a-overlay.dtb /boot/firmware/overlays/
+sudo cp ./usr/tft35a-overlay.dtb /boot/firmware/overlays/tft35a.dtbo
+
+# Systemspezifische Konfigurationen laden
+source ./system_config.sh
+
+# Funktion zur Aktualisierung oder zum Hinzufügen einer Konfigurationszeile
+update_config() {
+    local file=$1
+    local key=$2
+    local value=$3
+    local line="$key=$value"
+    local pattern="^$key="
+    if grep -q "$pattern" "$file"; then
+        sudo sed -i "s|$pattern.*|$line|" "$file"
+    else
+        echo "$line" | sudo tee -a "$file"
+    fi
+}
+
+# Einstellungen in config.txt aktualisieren
+CONFIG="/boot/firmware/config.txt"
+update_config "$CONFIG" "hdmi_force_hotplug" "1"
+update_config "$CONFIG" "dtparam=i2c_arm" "on"
+update_config "$CONFIG" "dtparam=spi" "on"
+update_config "$CONFIG" "enable_uart" "1"
+update_config "$CONFIG" "dtoverlay" "tft35a:rotate=90"
+update_config "$CONFIG" "hdmi_group" "2"
+update_config "$CONFIG" "hdmi_mode" "1"
+update_config "$CONFIG" "hdmi_mode" "87"
+update_config "$CONFIG" "hdmi_cvt" "480 320 60 6 0 0 0"
+update_config "$CONFIG" "hdmi_drive" "2"
+
+# Kalibrierungsdatei für das TFT-Display kopieren
+sudo cp ./usr/99-calibration.conf-35-90 /etc/X11/xorg.conf.d/99-calibration.conf
+
+# Inittab-Datei ersetzen
+sudo cp ./usr/inittab /etc/
+
+# Installationsstatus anzeigen
+sudo touch ./.have_installed
+echo "gpio:resistance:35:90:480:320" > ./.have_installed
+
+# System aktualisieren und notwendige Pakete installieren
+sudo apt-get update
+
+# Überprüfen der Internetverbindung und Installieren der Abhängigkeiten
+if wget --spider --quiet --tries=1 --timeout=10 https://cmake.org/; then
+    sudo apt-get install cmake libraspberrypi-dev -y 2> error_output.txt
+    result=$(cat ./error_output.txt)
+    echo -e "\033[31m$result\033[0m"
+    if type cmake > /dev/null 2>&1; then
+        sudo rm -rf rpi-fbcp
+        if wget --spider --quiet --tries=1 --timeout=10 https://github.com; then
+            sudo git clone https://github.com/tasanakorn/rpi-fbcp
+            cd rpi-fbcp
+            # Prüfen und Anpassen der CMakeLists.txt
+            if [ -f "CMakeLists.txt" ]; then
+                # Füge die project-Anweisung hinzu, falls nicht vorhanden
+                if ! grep -q "^project(" CMakeLists.txt; then
+                    echo "cmake_minimum_required(VERSION 3.0)" > temp.txt
+                    echo "project(rpi-fbcp)" >> temp.txt
+                    cat CMakeLists.txt >> temp.txt
+                    mv temp.txt CMakeLists.txt
+                fi
+                # Füge Installationsregeln hinzu, falls nicht vorhanden
+                if ! grep -q "install(TARGETS" CMakeLists.txt; then
+                    echo "install(TARGETS fbcp DESTINATION bin)" >> CMakeLists.txt
+                fi
+            else
+                echo "CMakeLists.txt nicht gefunden."
+                exit 1
+            fi
+            sudo mkdir ./build
+            cd ./build/
+            sudo cmake ..
+            sudo make
+            sudo make install
+            cd ../../
+        else
+            echo "Netzwerkfehler, kann rpi-fbcp von GitHub nicht klonen."
+            exit 1
+        fi
+    else
+        echo "Installation von CMake fehlgeschlagen."
+        exit 1
+    fi
+else
+    echo "Netzwerkfehler, cmake.org ist nicht erreichbar."
+    exit 1
+fi
+
+# Installation von evdev falls notwendig
+current_year=$(date +%Y)
+if [ "$current_year" -lt 2024 ]; then
+    echo "Das aktuelle Jahr ist vor 2024, kein Update notwendig."
+else
+    echo "Das Jahr ist 2024 oder später, Touch-Konfiguration wird aktualisiert."
+    if wget --spider --quiet --tries=1 --timeout=10 http://mirrors.zju.edu.cn/raspbian/raspbian; then
+        sudo apt-get install xserver-xorg-input-evdev -y
+    else
+        echo "Netzwerkfehler, kann die Raspbian-Spiegel nicht erreichen."
+        exit 1
+    fi
+fi
+
+# Sicherstellen, dass alle Änderungen auf die Festplatte geschrieben werden
+sudo sync
+sudo sync
+
+# Parameter für zusätzliche Skripte überprüfen
+if [ "$#" -eq 1 ]; then
+    sudo ./rotate.sh "$1"
+elif [ "$#" -gt 1 ]; then
+    echo "Zu viele Parameter."
+    exit 1
+fi
+
+# System neu starten, um alle Änderungen anzuwenden
+echo "System wird jetzt neu gestartet..."
+sudo reboot
