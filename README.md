@@ -62,7 +62,7 @@ And Ensure that the Raspberry Pi is connected to the Internet before executing t
 ```chmod -R 755 LCD-show```<br>
 ```cd LCD-show/```<br>
   
-3.)Step3, According to your LCD's type, excute the corresponding driver:
+3.)Step3, According to your LCD's type, execute the corresponding driver:
 ====================================================
 
 # 2.4” RPi Display (MPI2401):
