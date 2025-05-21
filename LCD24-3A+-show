@@ -45,7 +45,9 @@ sudo cp ./usr/inittab /etc/
 sudo touch ./.have_installed
 echo "gpio:resistance:32:90:480:360" > ./.have_installed
 
+if [[ "$deb_version" < "12.10" ]]; then
 sudo apt-get update
+fi
 #FBCP install
 wget --spider -q -o /dev/null --tries=1 -T 10 https://cmake.org/
 if [ $? -eq 0 ]; then

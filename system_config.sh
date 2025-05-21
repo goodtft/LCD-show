@@ -34,7 +34,11 @@ sudo cp -rf ./boot/config-nomal-12.1-32.txt ./boot/config.txt.bak
 fi
 fi
 elif [ $hardware_arch -eq 64 ]; then
+if [[ "$deb_version" < "12.1" ]]; then
 sudo cp -rf ./boot/config-nomal-11.4-64.txt ./boot/config.txt.bak
+else
+sudo cp -rf ./boot/config-nomal-12.10-64.txt ./boot/config.txt.bak
+fi
 fi
 
 
