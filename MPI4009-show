@@ -11,6 +11,10 @@ sudo ./system_backup.sh
 #fi
 
 source ./system_config.sh
+if [[ "$deb_version" = "13.1" ]] || [[ "$deb_version" > "13.1" ]]; then
+sudo sed -i -e 's/#dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d/' ./boot/config.txt.bak
+fi
+
 sudo echo "hdmi_force_hotplug=1" >> ./boot/config.txt.bak
 sudo echo "hdmi_force_edid_audio=1" >> ./boot/config.txt.bak
 sudo echo "dtparam=i2c_arm=on" >> ./boot/config.txt.bak
