@@ -140,5 +140,8 @@ elif [ $# -gt 1 ]; then
 echo "Too many parameters"
 fi
 
+echo "Removing 99-fturbo"
+sudo mv /usr/share/X11/xorg.conf.d/99-fbturbo.conf ~
+
 echo "reboot now"
 sudo reboot
