@@ -16,6 +16,7 @@ else
 hardware_model=255
 fi
 
+sudo raspi-config nonint do_boot_behaviour B2
 sudo raspi-config nonint do_wayland W1
 if [ -f /boot/firmware/config.txt ]; then
 sudo ln -sf /boot/firmware/config.txt /boot/config.txt
