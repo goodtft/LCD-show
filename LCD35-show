@@ -39,7 +39,9 @@ fi
 
 if [[ "$deb_version" = "13.1" ]] || [[ "$deb_version" > "13.1" ]]; then
 sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.~
-sudo cp -rf ./etc/rc_x11.local /etc/rc.local
+sudo cp -rf ./etc/.bash_profile /home/$username/
+
+#sudo cp -rf ./etc/rc_x11.local /etc/rc.local
 fi
 
 #if test "$root_dev" = "/dev/mmcblk0p7";then
