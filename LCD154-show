@@ -39,9 +39,19 @@ sudo cp -rf ./boot/config.txt.bak /boot/config.txt
 #fi
 #sudo cp ./usr/inittab /etc/
 #sudo cp ./boot/config-mhs35.txt /boot/config.txt
+
+if [[ "$deb_version" = "13.1" ]] || [[ "$deb_version" > "13.1" ]]; then
+sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.~
+sudo cp -rf ./etc/.bash_profile /home/$username/
+
+#sudo cp -rf ./etc/rc_x11.local /etc/rc.local
+fi
+
+
 sudo touch ./.have_installed
 echo "gpio:resistance:LCD154:90:300:300" > ./.have_installed
 
+if [[ "$deb_version" < "13.1" ]]; then
 #FBCP install
 if [ -d ./fbcp-ili9341 ]; then
 sudo rm -rf ./fbcp-ili9341
@@ -73,6 +83,7 @@ sudo make -j
 sudo install fbcp-ili9341 /usr/local/bin/fbcp
 cd - > /dev/null
 sudo cp -rf ./etc/rc.local /etc/rc.local
+fi
 fi
 fi
 

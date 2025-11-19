@@ -36,6 +36,15 @@ sudo cp -rf ./usr/99-calibration.conf-mhs397-0  /etc/X11/xorg.conf.d/99-calibrat
 if [[ "$deb_version" < "12.1" ]]; then
 sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
 fi
+
+if [[ "$deb_version" = "13.1" ]] || [[ "$deb_version" > "13.1" ]]; then
+sudo cp -rf ./usr/99-fbturbo-fbcp.conf  /usr/share/X11/xorg.conf.d/99-fbturbo.~
+sudo cp -rf ./etc/.bash_profile /home/$username/
+
+#sudo cp -rf ./etc/rc_x11.local /etc/rc.local
+fi
+
+if [[ "$deb_version" < "13.1" ]]; then
 sudo cp -rf ./etc/rc.local /etc/rc.local
 #if test "$root_dev" = "/dev/mmcblk0p7";then
 #sudo cp ./usr/cmdline.txt-noobs /boot/cmdline.txt
@@ -47,10 +56,12 @@ sudo cp -rf ./etc/rc.local /etc/rc.local
 sudo cp -rf ./etc/modules  /etc/modules
 sudo chmod 644 /etc/modules
 sudo cp -rf ./etc/modprobe.d/fbtft.conf /etc/modprobe.d/
+fi
 
 sudo touch ./.have_installed
 echo "hdmi:resistance:mhs397:0:800:480" > ./.have_installed
 
+if [[ "$deb_version" < "13.1" ]]; then
 if [[ "$deb_version" < "12.10" ]]; then
 sudo apt-get update
 fi
@@ -95,6 +106,7 @@ fi
 else
 echo "bad network, can't install cmake!!!"
 fi
+fi
 
 #evdev install
 #nodeplatform=`uname -n`
@@ -103,8 +115,8 @@ version=`uname -v`
 #if test "$nodeplatform" = "raspberrypi";then
 #echo "this is raspberrypi kernel"
 input_result=0
-version=${version##* }
-#version=${version#*#}
+version=${version##*(}
+version=${version%%-*}
 echo $version
 if test $version -lt 2017;then
 echo "reboot"
