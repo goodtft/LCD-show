@@ -83,7 +83,7 @@ wget --spider -q -o /dev/null --tries=1 -T 10 http://mirrors.zju.edu.cn/raspbian
 if [ $? -ne 0 ]; then
 input_result=1
 else
-sudo apt-get update
+#sudo apt-get update
 sudo apt-get install xserver-xorg-input-evdev  2> error_output.txt
 dpkg -l | grep xserver-xorg-input-evdev > /dev/null 2>&1
 if [ $? -ne 0 ]; then
