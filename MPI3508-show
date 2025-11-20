@@ -42,9 +42,16 @@ sudo cp ./usr/inittab /etc/
 if [[ "$deb_version" < "12.1" ]]; then
 sudo cp -rf ./usr/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
 fi
+
 if [ ! -d /etc/X11/xorg.conf.d ]; then
 sudo mkdir /etc/X11/xorg.conf.d 
 fi
+
+if [[ "$deb_version" = "13.1" ]] || [[ "$deb_version" > "13.1" ]]; then
+sudo cp -rf ./usr/99-fbturbo.conf-HDMI  /usr/share/X11/xorg.conf.d/99-fbturbo.~
+sudo cp -rf ./etc/.bash_profile /home/$username/
+fi
+
 sudo cp -rf ./usr/99-calibration.conf-3508-0 /etc/X11/xorg.conf.d/99-calibration.conf
 sudo touch ./.have_installed
 echo "hdmi:resistance:3508:0:480:320" > ./.have_installed
@@ -55,8 +62,8 @@ version=`uname -v`
 #if test "$nodeplatform" = "raspberrypi";then
 #echo "this is raspberrypi kernel"
 input_result=0
-version=${version##* }
-#version=${version#*#}
+version=${version##*(}
+version=${version%%-*}
 echo $version
 if test $version -lt 2017;then
 echo "reboot"
