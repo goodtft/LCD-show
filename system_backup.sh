@@ -43,7 +43,12 @@ sudo cp -rf ./boot/config-noobs-nomal.txt /boot/config.txt
 #sudo cp -rf ./usr/cmdline.txt-noobs-original /boot/cmdline.txt
 else
 sudo cp -rf ./boot/config-nomal.txt /boot/config.txt
-#sudo cp -rf ./usr/cmdline.txt-original /boot/cmdline.txt
+
+if [[ "$deb_ver" = "13.1" ]] || [[ "$deb_ver" > "13.1" ]]; then
+sudo cp -rf ./usr/cmdline.txt-original /boot/firmware/cmdline.txt
+sudo cp ./etc/autostart /etc/xdg/lxsession/rpd-x/
+fi
+
 fi
 if [ -f /usr/share/X11/xorg.conf.d/99-fbturbo.conf ]; then
 sudo cp -rf /usr/share/X11/xorg.conf.d/99-fbturbo.conf ./.system_backup/
