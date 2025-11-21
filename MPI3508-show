@@ -50,7 +50,8 @@ fi
 if [[ "$deb_version" = "13.1" ]] || [[ "$deb_version" > "13.1" ]]; then
 sudo cp -rf ./usr/99-fbturbo.conf-HDMI  /usr/share/X11/xorg.conf.d/99-fbturbo.~
 sudo cp -rf ./etc/.bash_profile /home/$username/
-sudo sed -i "/xrandr -d :0 -s/d" /etc/xdg/lxsession/rpd-x/autostart
+#sudo sed -i "/xrandr -d :0 -s/d" /etc/xdg/lxsession/rpd-x/autostart
+sudo sed -i '1s/$/ video=HDMI-A-1:640x480M@60/' /boot/firmware/cmdline.txt
 sudo echo "xrandr -d :0 -s 640x480" >> /etc/xdg/lxsession/rpd-x/autostart
 fi
 
