@@ -1,0 +1,149 @@
+#!/bin/bash
+#
+# MHS35-show fix for Kali Linux on Raspberry Pi 5
+# This script fixes the original LCD-show MHS35-show script which was designed
+# for Raspberry Pi OS and doesn't work properly on Kali Linux / Pi 5
+#
+# Issues fixed:
+# - raspi-config doesn't exist on Kali
+# - Boot files are in /boot/firmware/ on Pi 5, not /boot/
+# - /etc/rc.local doesn't exist on Kali (uses systemd)
+# - Various missing config files
+#
+# Usage: Run this AFTER cloning LCD-show repo
+#   git clone https://github.com/goodtft/LCD-show.git
+#   cd LCD-show
+#   curl -O https://raw.githubusercontent.com/<your-repo>/main/lcd-show-fix/MHS35-show-kali-pi5.sh
+#   chmod +x MHS35-show-kali-pi5.sh
+#   sudo ./MHS35-show-kali-pi5.sh
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}=== MHS35 LCD Setup for Kali Linux on Raspberry Pi 5 ===${NC}"
+
+# Check if running as root
+if [ "$EUID" -ne 0 ]; then
+    echo -e "${RED}Please run as root (sudo)${NC}"
+    exit 1
+fi
+
+# Detect boot partition location
+if [ -d /boot/firmware ]; then
+    BOOT_DIR="/boot/firmware"
+else
+    BOOT_DIR="/boot"
+fi
+echo -e "${YELLOW}Boot directory detected: ${BOOT_DIR}${NC}"
+
+# Detect if we're in LCD-show directory
+if [ ! -f ./usr/mhs35-overlay.dtb ]; then
+    echo -e "${RED}Error: mhs35-overlay.dtb not found.${NC}"
+    echo "Please run this script from the LCD-show directory."
+    echo "  git clone https://github.com/goodtft/LCD-show.git"
+    echo "  cd LCD-show"
+    exit 1
+fi
+
+# Get system info
+DEB_VERSION=$(cat /etc/debian_version | tr -d '\n')
+ARCH=$(getconf LONG_BIT)
+USERNAME=$(logname 2>/dev/null || echo $SUDO_USER)
+
+echo -e "${YELLOW}Debian version: ${DEB_VERSION}${NC}"
+echo -e "${YELLOW}Architecture: ${ARCH}-bit${NC}"
+echo -e "${YELLOW}User: ${USERNAME}${NC}"
+
+# Step 1: Copy overlay to correct location
+echo -e "${GREEN}[1/6] Installing display overlay...${NC}"
+mkdir -p "${BOOT_DIR}/overlays"
+cp ./usr/mhs35-overlay.dtb "${BOOT_DIR}/overlays/mhs35.dtbo"
+
+# Step 2: Backup existing config
+echo -e "${GREEN}[2/6] Backing up config.txt...${NC}"
+cp "${BOOT_DIR}/config.txt" "${BOOT_DIR}/config.txt.backup.$(date +%Y%m%d%H%M%S)"
+
+# Step 3: Update config.txt
+echo -e "${GREEN}[3/6] Updating config.txt...${NC}"
+
+# Remove any existing MHS35 config lines to avoid duplicates
+sed -i '/dtoverlay=mhs35/d' "${BOOT_DIR}/config.txt"
+sed -i '/hdmi_cvt 480 320/d' "${BOOT_DIR}/config.txt"
+
+# Check if [all] section exists, if not add it
+if ! grep -q "^\[all\]" "${BOOT_DIR}/config.txt"; then
+    echo "" >> "${BOOT_DIR}/config.txt"
+    echo "[all]" >> "${BOOT_DIR}/config.txt"
+fi
+
+# Add MHS35 configuration under [all] section
+cat >> "${BOOT_DIR}/config.txt" << 'EOF'
+
+# MHS35 3.5" LCD Configuration
+hdmi_force_hotplug=1
+dtparam=i2c_arm=on
+dtparam=spi=on
+enable_uart=1
+dtoverlay=mhs35:rotate=90
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt 480 320 60 6 0 0 0
+hdmi_drive=2
+EOF
+
+# Step 4: Setup X11 calibration
+echo -e "${GREEN}[4/6] Configuring touchscreen calibration...${NC}"
+mkdir -p /etc/X11/xorg.conf.d
+
+if [ -f ./usr/99-calibration.conf-mhs35-90 ]; then
+    cp ./usr/99-calibration.conf-mhs35-90 /etc/X11/xorg.conf.d/99-calibration.conf
+fi
+
+# Remove libinput config if exists (conflicts with evdev)
+rm -f /etc/X11/xorg.conf.d/40-libinput.conf
+
+# Step 5: Install evdev for touchscreen
+echo -e "${GREEN}[5/6] Installing touchscreen driver...${NC}"
+
+# Try apt install first, fall back to local deb
+if apt-get install -y xserver-xorg-input-evdev 2>/dev/null; then
+    echo "evdev installed from repository"
+else
+    echo "Installing evdev from local package..."
+    if [ "$ARCH" = "64" ] && [ -f ./xserver-xorg-input-evdev_1%3a2.10.6-2_arm64.deb ]; then
+        dpkg -i ./xserver-xorg-input-evdev_1%3a2.10.6-2_arm64.deb || true
+    elif [ -f ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb ]; then
+        dpkg -i ./xserver-xorg-input-evdev_1%3a2.10.6-1+b1_armhf.deb || true
+    fi
+fi
+
+# Copy evdev config for proper priority
+if [ -f /usr/share/X11/xorg.conf.d/10-evdev.conf ]; then
+    cp /usr/share/X11/xorg.conf.d/10-evdev.conf /usr/share/X11/xorg.conf.d/45-evdev.conf
+fi
+
+# Step 6: Mark as installed
+echo -e "${GREEN}[6/6] Finalizing...${NC}"
+echo "gpio:resistance:mhs35:90:480:320" > ./.have_installed
+
+sync
+sync
+
+echo ""
+echo -e "${GREEN}=== Installation Complete ===${NC}"
+echo ""
+echo "The system will reboot in 5 seconds..."
+echo "After reboot, your MHS35 LCD should be working."
+echo ""
+echo "If you have issues, check:"
+echo "  - ${BOOT_DIR}/config.txt for configuration"
+echo "  - ${BOOT_DIR}/overlays/mhs35.dtbo exists"
+echo ""
+
+sleep 5
+reboot
