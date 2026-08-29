@@ -1,6 +1,6 @@
 Raspberry Pi Framebuffer Copy
 =============================
-This program used for copy primary framebuffer to secondary framebuffer (eg. FBTFT). It require lastest raspberry pi firmware (> 2013-07-11) to working properly.
+This program is used for copying the primary framebuffer to secondary framebuffer (e.g. FBTFT). It requires the lastest raspberry pi firmware (> 2013-07-11) to work properly.
 
 Tested on Raspberry Pi 3
 ========================
@@ -10,32 +10,30 @@ Tested on Raspberry Pi 3
 Requirement
 -----------
 cmake
-
-$ sudo apt-get install cmake
-
+```bash
+sudo apt-get install cmake
+```
 Build
 -----
-
-    $ mkdir build
-    
-    $ cd build
-    
-    $ cmake ..
-    
-    $ make 
-
-
+```bash
+mkdir build
+cd build
+cmake ..
+make 
+```
 How To Use
 ----------
-$ ./fbcp
-
-Wanna to run from booting
+```bash
+./fbcp
+```
+Wanna run at boot
 -------------------------
-$ sudo cp fbcp /usr/bin
-$ sudo chmod +x /usr/bin/fbcp
-$ sudo nano /etc/rc.local -> add new line before "exit 0" with "/usr/bin/fbcp &" without quote
-$ sudo reboot
-
+```bash
+sudo cp fbcp /usr/bin
+sudo chmod +x /usr/bin/fbcp
+sudo nano /etc/rc.local # add new line before "exit 0" with "/usr/bin/fbcp &" without quote
+sudo reboot
+```
 
 License
 -------

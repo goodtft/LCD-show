@@ -114,7 +114,7 @@ When using one of the displays that stack on top of the Pi that are already reco
 - `-DADAFRUIT_HX8357D_PITFT=ON`: If you have the [Adafruit PiTFT - Assembled 480x320 3.5" TFT+Touchscreen for Raspberry Pi](https://www.adafruit.com/product/2097) display, add this line.
 - `-DFREEPLAYTECH_WAVESHARE32B=ON`: If you are running on the [Freeplay CM3 or Zero](https://www.freeplaytech.com/product/freeplay-cm3-diy-kit/) device, pass this flag. (this is not a hat, but still a preconfigured pin assignment)
 - `-DWAVESHARE35B_ILI9486=ON`: If specified, targets a [Waveshare 3.5" 480x320 ILI9486](https://www.amazon.co.uk/dp/B01N48NOXI/ref=pe_3187911_185740111_TE_item) display.
-- `-DTONTEC_MZ61581=ON`: If you are running on the [Tontec 3.5" 320x480 LCD Display](https://www.ebay.com/p/Tontec-3-5-Inches-Touch-Screen-for-Raspberry-Pi-Display-TFT-Monitor-480x320-LCD/1649448059) display, pass this.
+- `-DTONTEC_MZ61581=ON`: If you are running on the [Tontec 3.5" 320x480 LCD](https://www.ebay.com/p/Tontec-3-5-Inches-Touch-Screen-for-Raspberry-Pi-Display-TFT-Monitor-480x320-LCD/1649448059) display, pass this.
 - `-DWAVESHARE_ST7789VW_HAT=ON`: If specified, targets a [240x240, 1.3inch IPS LCD display HAT for Raspberry Pi](https://www.waveshare.com/1.3inch-lcd-hat.htm) with ST7789VW display controller.
 - `-DWAVESHARE_ST7735S_HAT=ON`: If specified, targets a [128x128, 1.44inch LCD display HAT for Raspberry Pi](https://www.waveshare.com/1.3inch-lcd-hat.htm) with ST7735S display controller.
 - `-DKEDEI_V63_MPI3501=ON`: If specified, targets a [KeDei 3.5 inch SPI TFTLCD 480*320 16bit/18bit version 6.3 2018/4/9](https://github.com/juj/fbcp-ili9341/issues/40) display with MPI3501 display controller.
@@ -511,7 +511,7 @@ If the color channels are mixed (red is blue, blue is red, green is green) like 
 
 If the color intensities look wrong (white is black, black is white, color looks like a negative image) like seen in the middle image, pass the CMake option `-DDISPLAY_INVERT_COLORS=ON` to the build.
 
-If the colors looks off in some other fashion, it is possible that the display is just being driven at a too high SPI bus speed, in which case try making the display run slower by choosing a higher `-DSPI_BUS_CLOCK_DIVISOR=` option to CMake. Especially on ILI9486 displays it has been observed that the colors on the display can become distorted if the display is run too fast beyond its maximum capability.
+If the colors look off in some other fashion, it is possible that the display is just being driven at a too high SPI bus speed, in which case try making the display run slower by choosing a higher `-DSPI_BUS_CLOCK_DIVISOR=` option to CMake. Especially on ILI9486 displays it has been observed that the colors on the display can become distorted if the display is run too fast beyond its maximum capability.
 
 #### Failed to allocate GPU memory!
 
