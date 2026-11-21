@@ -1,0 +1,115 @@
+/*
+ * Device Tree overlay for MHS-3.5" display (MHS3528) — PROPOSED SOURCE
+ * Reconstructed from the binary usr/mhs35-overlay.dtb shipped in
+ * goodtft/LCD-show (which ships no source), with one addition:
+ * a `drm` override modelled on the stock piscreen overlay, so the
+ * panel can bind the kernel ILI9486 DRM driver (waveshare,rpi-lcd-35)
+ * instead of fbtft, and coexist with vc4-kms-v3d / Wayland / HDMI.
+ *
+ * Usage:
+ *   fbtft (legacy):  dtoverlay=mhs35:rotate=90
+ *   DRM   (new):     dtoverlay=mhs35:rotate=90,drm
+ *
+ * Build: dtc -@ -I dts -O dtb -o mhs35.dtbo mhs35-overlay-drm.dts
+ * Status: DRAFT — build + on-hardware test still required.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+
+/ {
+	compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&spi0>;
+		__overlay__ {
+			status = "okay";
+
+			spidev@0 { status = "disabled"; };
+			spidev@1 { status = "disabled"; };
+		};
+	};
+
+	fragment@1 {
+		target = <&gpio>;
+		__overlay__ {
+			tft35a_pins: tft35a_pins {
+				brcm,pins = <17 25 24>;
+				brcm,function = <0 0 0>; /* in in in — as shipped */
+			};
+		};
+	};
+
+	fragment@2 {
+		target = <&spi0>;
+		__overlay__ {
+			/* needed to avoid dtc warning */
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			tft35a: tft35a@0 {
+				compatible = "ilitek,ili9486";
+				reg = <0>;
+				pinctrl-names = "default";
+				pinctrl-0 = <&tft35a_pins>;
+
+				spi-max-frequency = <115000000>;
+				txbuflen = <32768>;
+				rotate = <90>;
+				bgr;
+				fps = <30>;
+				buswidth = <8>;
+				regwidth = <16>;
+				reset-gpios = <&gpio 25 GPIO_ACTIVE_LOW>;
+				dc-gpios = <&gpio 24 GPIO_ACTIVE_HIGH>;
+				debug = <0>;
+
+				/* MHS35 init sequence, verbatim from the shipped .dtb */
+				init = <0x10000f1 0x36 0x04 0x00 0x3c 0x0f 0x8f
+					0x10000f2 0x18 0xa3 0x12 0x02 0xb2 0x12 0xff 0x10 0x00
+					0x10000f8 0x21 0x04
+					0x10000f9 0x00 0x08
+					0x1000036 0x08
+					0x10000b4 0x00
+					0x10000c1 0x41
+					0x10000c5 0x00 0x91 0x80 0x00
+					0x10000e0 0x0f 0x1f 0x1c 0x0c 0x0f 0x08 0x48 0x98 0x37 0x0a 0x13 0x04 0x11 0x0d 0x00
+					0x10000e1 0x0f 0x32 0x2e 0x0b 0x0d 0x05 0x47 0x75 0x37 0x06 0x10 0x03 0x24 0x20 0x00
+					0x100003a 0x55
+					0x1000011
+					0x1000036 0x28
+					0x20000ff
+					0x1000029>;
+			};
+
+			tft35a_ts: tft35a-ts@1 {
+				compatible = "ti,ads7846";
+				reg = <1>;
+
+				spi-max-frequency = <2000000>;
+				interrupts = <17 2>; /* high-to-low edge triggered */
+				interrupt-parent = <&gpio>;
+				pendown-gpio = <&gpio 17 GPIO_ACTIVE_LOW>;
+				ti,x-plate-ohms = /bits/ 16 <60>;
+				ti,pressure-max = /bits/ 16 <255>;
+			};
+		};
+	};
+
+	__overrides__ {
+		speed =		<&tft35a>,"spi-max-frequency:0";
+		txbuflen =	<&tft35a>,"txbuflen:0";
+		rotate =	<&tft35a>,"rotate:0",
+				<&tft35a>,"rotation:0";
+		fps =		<&tft35a>,"fps:0";
+		bgr =		<&tft35a>,"bgr:0";
+		debug =		<&tft35a>,"debug:0";
+		swapxy =	<&tft35a_ts>,"ti,swap-xy?";
+		/* NEW: bind the DRM ili9486 driver instead of fbtft,
+		   same trick as piscreen's drm override. */
+		drm =		<&tft35a>,"compatible=waveshare,rpi-lcd-35",
+				<&tft35a>,"reset-gpios:8=",<GPIO_ACTIVE_HIGH>;
+	};
+};

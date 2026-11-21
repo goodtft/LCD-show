@@ -17,8 +17,16 @@ else
 hardware_model=255
 fi
 
-sudo raspi-config nonint do_boot_behaviour B2
-sudo raspi-config nonint do_wayland W1
+# NOTE (fork fix): a display installer must not silently reconfigure
+# the user's session. These two lines used to run here:
+#   sudo raspi-config nonint do_boot_behaviour B2   (console autologin)
+#   sudo raspi-config nonint do_wayland W1          (X11 backend)
+# Together they removed the Wayland desktop, which disables
+# Raspberry Pi Connect screen sharing (it requires a Wayland
+# desktop session with desktop autologin) and leaves the user at a
+# console on next boot. Boot behaviour and display backend are now
+# left exactly as the user configured them. Installers that need a
+# specific session state set it themselves, explicitly.
 if [ -f /boot/firmware/config.txt ]; then
 sudo ln -sf /boot/firmware/config.txt /boot/config.txt
 fi

@@ -1,0 +1,158 @@
+#!/bin/bash
+# MHS35-DRM-show — modern installer for the MHS-3.5" (MHS3528) SPI panel.
+#
+# Unlike MHS35-show, this installer:
+#   * does NOT replace /boot/firmware/config.txt with a template
+#     (the template leaves dtoverlay=vc4-kms-v3d commented out, which
+#     removes DRM/KMS entirely — no HDMI output, no Wayland)
+#   * does NOT force hdmi_group/hdmi_mode/hdmi_cvt 480x320
+#     (the legacy flow rendered the desktop on HDMI at panel resolution
+#     and mirrored it to the panel with fbcp; HDMI was the sacrifice)
+#   * does NOT switch the system to console boot (B2) or X11 (W1),
+#     and does NOT install fbcp, 99-fbturbo.conf, or a startx
+#     .bash_profile — all of which break Raspberry Pi Connect
+#     screen sharing, which requires a Wayland desktop session
+#   * loads the panel through the kernel ILI9486 DRM driver
+#     (dtoverlay=mhs35,drm) so the panel is a second DRM output
+#     alongside HDMI: labwc/Wayland can use both, at native resolutions
+#
+# Usage: sudo ./MHS35-DRM-show [0|90|180|270]   (default rotation 90)
+# The panel keeps working after reboot; HDMI can be plugged in at
+# any time. After the reboot, run ./MHS35-desktop-setup.sh as your
+# user: it installs the desktop arrangement verified on hardware
+# (HDMI = main display, panel = rotated secondary, taskbar on the
+# big screen, and a virtual output so Pi Connect shows both
+# screens side by side). See FIXES.md for the details.
+
+set -u
+
+if [ "$(id -u)" -ne 0 ]; then
+  echo "run with sudo: sudo ./MHS35-DRM-show"
+  exit 1
+fi
+
+ROTATE=90
+if [ $# -eq 1 ]; then
+  case "$1" in
+    0|90|180|270) ROTATE=$1 ;;
+    *) echo "invalid rotation: $1 (use 0, 90, 180 or 270)"; exit 1 ;;
+  esac
+elif [ $# -gt 1 ]; then
+  echo "Too many parameters"; exit 1
+fi
+
+# Panel SPI speed for the DRM driver. The fbtft driver ran this panel
+# far faster; the DRM driver is stable at piscreen-class speeds.
+# Raise it in config.txt (the speed= parameter) once your panel
+# is proven stable.
+SPEED=24000000
+
+# --- locate the real boot config (Bookworm/Trixie moved it) ---
+BOOTDIR=/boot
+CFG=/boot/config.txt
+if [ -f /boot/firmware/config.txt ]; then
+  BOOTDIR=/boot/firmware
+  CFG=/boot/firmware/config.txt
+fi
+
+# --- back up the user's actual config, in place, timestamped ---
+STAMP=$(date +%Y%m%d-%H%M%S)
+cp -a "$CFG" "$CFG.bak-$STAMP"
+echo "backed up $CFG -> $CFG.bak-$STAMP"
+
+# --- install the overlay (source: usr/mhs35-overlay.dts) ---
+# The shipped .dtb must carry the 'drm' override. If it does not
+# (e.g. an older checkout), rebuild it from source; never silently
+# install a panel overlay that cannot bind the DRM driver.
+if ! grep -a -q 'waveshare' ./usr/mhs35-overlay.dtb; then
+  echo "shipped mhs35-overlay.dtb has no drm override — rebuilding from source"
+  if ! command -v dtc > /dev/null 2>&1; then
+    apt-get update && apt-get install -y device-tree-compiler gcc
+  fi
+  ( cd ./usr && ./build-mhs35-overlay.sh )
+  grep -a -q 'waveshare' ./usr/mhs35-overlay.dtb || {
+    echo "ERROR: overlay rebuild did not produce the drm override; aborting"
+    exit 1
+  }
+fi
+if [ ! -d "$BOOTDIR/overlays" ]; then
+  mkdir -p "$BOOTDIR/overlays"
+fi
+cp -f ./usr/mhs35-overlay.dtb "$BOOTDIR/overlays/"
+cp -f ./usr/mhs35-overlay.dtb "$BOOTDIR/overlays/mhs35.dtbo"
+
+# --- edit config.txt in place; touch nothing unrelated ---
+# KMS on. The legacy template left this commented out; that single
+# line is what killed HDMI and Wayland.
+sed -i -e 's/^#dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d/' "$CFG"
+grep -q '^dtoverlay=vc4-kms-v3d' "$CFG" || echo 'dtoverlay=vc4-kms-v3d' >> "$CFG"
+
+# Remove any panel lines / HDMI forcing a previous LCD-show install added.
+sed -i \
+  -e '/^dtoverlay=mhs35/d' \
+  -e '/^dtoverlay=mhs35b/d' \
+  -e '/^dtoverlay=piscreen/d' \
+  -e '/^hdmi_cvt /d' \
+  -e '/^hdmi_mode=87/d' \
+  "$CFG"
+
+# Panel, as a DRM display.
+grep -q '^dtparam=spi=on' "$CFG" || echo 'dtparam=spi=on' >> "$CFG"
+grep -q '^dtparam=i2c_arm=on' "$CFG" || echo 'dtparam=i2c_arm=on' >> "$CFG"
+echo "dtoverlay=mhs35,drm,rotate=$ROTATE,speed=$SPEED" >> "$CFG"
+
+# --- remove the legacy fbcp mirror path if a previous install left it ---
+rm -f /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+rm -f /usr/share/X11/xorg.conf.d/99-fbturbo.~
+if [ -f /etc/rc.local ]; then
+  sed -i -e '/fbcp/d' /etc/rc.local
+fi
+USERNAME=$(logname 2>/dev/null || echo "")
+if [ -n "$USERNAME" ] && [ -f "/home/$USERNAME/.bash_profile" ] \
+   && grep -q 'startx' "/home/$USERNAME/.bash_profile"; then
+  mv "/home/$USERNAME/.bash_profile" "/home/$USERNAME/.bash_profile.lcd-show.bak"
+  echo "moved the startx .bash_profile aside (it bypassed Wayland)"
+fi
+# The X11 evdev calibration belongs to the legacy path only; under
+# Wayland the ADS7846 touch is a libinput device. Keep the file out
+# of the way but do not delete the user's copy.
+if [ -f /etc/X11/xorg.conf.d/99-calibration.conf ]; then
+  mv /etc/X11/xorg.conf.d/99-calibration.conf \
+     /etc/X11/xorg.conf.d/99-calibration.conf.lcd-show.bak
+fi
+
+# --- desktop autologin + Wayland, or Pi Connect cannot share the screen ---
+# raspi-config Wayland codes differ by release:
+#   Debian 12 (Bookworm): W3 = labwc
+#   Debian 13 (Trixie):   W2 = labwc
+DEB_MAJOR=$(cut -d. -f1 /etc/debian_version 2>/dev/null || echo 0)
+raspi-config nonint do_boot_behaviour B4
+if [ "$DEB_MAJOR" -ge 13 ]; then
+  raspi-config nonint do_wayland W2
+elif [ "$DEB_MAJOR" -eq 12 ]; then
+  raspi-config nonint do_wayland W3
+else
+  echo "note: Debian $DEB_MAJOR — set a Wayland backend in raspi-config"
+  echo "      (Advanced Options -> Wayland) for Pi Connect screen sharing."
+fi
+
+# Desktop arrangement (layout, taskbar screen, Pi Connect showing
+# both screens) is user-session state, so it is NOT set here: it is
+# installed by MHS35-desktop-setup.sh, run as the desktop user after
+# the reboot below. (An earlier revision installed a kanshi mirror
+# profile from here; mirroring was superseded on hardware — see
+# FIXES.md.)
+
+touch ./.have_installed
+echo "gpio:drm:mhs35:$ROTATE:480:320" > ./.have_installed
+
+sync
+sync
+echo "MHS35 (DRM) installed: panel + HDMI are live DRM outputs."
+echo "After the reboot, run as your user:  ./MHS35-desktop-setup.sh"
+echo "After reboot, verify with:  kmsprint   and   ls /sys/class/drm"
+echo "Touch note: if the pointer axes are swapped under Wayland, add"
+echo "  swapxy to the dtoverlay line in $CFG and reboot."
+echo "reboot now"
+sleep 1
+reboot
